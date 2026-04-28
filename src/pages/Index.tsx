@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronRight, Dumbbell, Flame, Activity, Clock } from "lucide-react";
 import { routines } from "@/data/routines";
-import { useHistory } from "@/lib/history";
+import { useHistory, computeWeeklyStreak } from "@/lib/history";
 import { cn } from "@/lib/utils";
 
 const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }> = {
@@ -14,17 +14,8 @@ const Index = () => {
   const { history } = useHistory();
   const today = new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
 
-  const streak = (() => {
-    if (history.length === 0) return 0;
-    const days = new Set(history.map((h) => new Date(h.date).toDateString()));
-    let count = 0;
-    const d = new Date();
-    while (days.has(d.toDateString())) {
-      count++;
-      d.setDate(d.getDate() - 1);
-    }
-    return count;
-  })();
+  const { thisWeek, goal, streak, fire } = computeWeeklyStreak(history);
+  const progressPct = Math.min(100, (thisWeek / goal) * 100);
 
   return (
     <div className="min-h-screen pb-12">
@@ -38,11 +29,24 @@ const Index = () => {
       <section className="px-6 grid grid-cols-2 gap-3 mb-6">
         <div className="glass-card p-4">
           <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Streak</p>
-          <p className="text-3xl font-bold mt-1">{streak}<span className="text-base text-muted-foreground ml-1">days</span></p>
+          <p className="text-3xl font-bold mt-1 flex items-baseline gap-1">
+            {streak}
+            <span className="text-base text-muted-foreground">{streak === 1 ? "week" : "weeks"}</span>
+            {fire && <span className="text-2xl ml-1" aria-label="On fire">🔥</span>}
+          </p>
         </div>
         <div className="glass-card p-4">
-          <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Sessions</p>
-          <p className="text-3xl font-bold mt-1">{history.length}</p>
+          <p className="text-[11px] uppercase tracking-widest text-muted-foreground">This week</p>
+          <p className="text-3xl font-bold mt-1 flex items-baseline gap-1 tabular-nums">
+            {thisWeek}<span className="text-muted-foreground">/{goal}</span>
+            {thisWeek >= 3 && <span className="text-2xl ml-1" aria-label="On fire">🔥</span>}
+          </p>
+          <div className="mt-2 h-1.5 rounded-full bg-secondary/60 overflow-hidden">
+            <div
+              className="h-full bg-primary transition-all"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
         </div>
       </section>
 
