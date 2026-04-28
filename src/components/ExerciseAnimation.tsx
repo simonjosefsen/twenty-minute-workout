@@ -203,6 +203,40 @@ export const ExerciseAnimation = ({ kind, size = 220 }: Props) => {
           </g>
         </g>
       )}
+
+      {kind === "march" && (
+        <g>
+          {head(160, 60)}
+          <line x1="160" y1="74" x2="160" y2="130" stroke={body} strokeWidth="6" strokeLinecap="round" />
+          {/* arms swinging opposite */}
+          <g style={{ transformOrigin: "160px 90px", animation: "march-r 0.7s ease-in-out infinite" }}>
+            <line x1="160" y1="90" x2="160" y2="125" stroke={body} strokeWidth="5" strokeLinecap="round" />
+          </g>
+          <g style={{ transformOrigin: "160px 90px", animation: "march-l 0.7s ease-in-out infinite" }}>
+            <line x1="160" y1="90" x2="160" y2="125" stroke={stroke} strokeWidth="5" strokeLinecap="round" />
+          </g>
+          {/* legs lifting alternating */}
+          <g style={{ transformOrigin: "160px 130px", animation: "march-l 0.7s ease-in-out infinite" }}>
+            <line x1="160" y1="130" x2="160" y2="178" stroke={body} strokeWidth="6" strokeLinecap="round" />
+          </g>
+          <g style={{ transformOrigin: "160px 130px", animation: "march-r 0.7s ease-in-out infinite" }}>
+            <line x1="160" y1="130" x2="160" y2="178" stroke={body} strokeWidth="6" strokeLinecap="round" />
+          </g>
+        </g>
+      )}
+
+      {kind === "catCow" && (
+        <g style={{ animation: "cat-cow 2s ease-in-out infinite", transformOrigin: "180px 150px" }}>
+          {head(120, 130)}
+          {/* back as arched line */}
+          <path d="M 130 135 Q 180 120 230 140" stroke={body} strokeWidth="8" fill="none" strokeLinecap="round" />
+          {/* front arms */}
+          <line x1="135" y1="138" x2="138" y2="175" stroke={body} strokeWidth="5" strokeLinecap="round" />
+          {/* back legs */}
+          <line x1="225" y1="142" x2="228" y2="175" stroke={body} strokeWidth="5" strokeLinecap="round" />
+          <line x1="138" y1="175" x2="228" y2="175" stroke={muted} strokeWidth="2" />
+        </g>
+      )}
     </svg>
   );
 };

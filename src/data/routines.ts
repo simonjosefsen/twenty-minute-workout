@@ -12,7 +12,9 @@ export type ExerciseKind =
   | "deadlift"
   | "stretch"
   | "shoulderTap"
-  | "halo";
+  | "halo"
+  | "march"
+  | "catCow";
 
 export type Exercise = {
   id: string;
@@ -70,13 +72,13 @@ const coreRound: Block[] = [
 
 // ---- Routine 3: Mobility & Strength ----
 const mobilityRound: Block[] = [
-  { type: "exercise", exercise: { id: "jj", name: "Jumping Jacks", kind: "jumpingJack", duration: 40, cue: "Steady rhythm, full range.", equipment: "—" } },
+  { type: "exercise", exercise: { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift knees to hip height, swing arms.", equipment: "—" } },
   restShort(20),
   { type: "exercise", exercise: { id: "lunge", name: "Reverse Lunges", kind: "lunge", reps: 12, cue: "Step back, drop rear knee. Alternate.", equipment: "Mat" } },
   restShort(20),
   { type: "exercise", exercise: { id: "deadlift", name: "KB Deadlift", kind: "deadlift", reps: 12, cue: "Hinge at hips, KB close to shins.", equipment: "Kettlebell" } },
   restShort(20),
-  { type: "exercise", exercise: { id: "stretch", name: "World's Greatest Stretch", kind: "stretch", duration: 45, cue: "Lunge, twist, reach. Alternate sides.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "On all fours. Inhale arch, exhale round.", equipment: "Mat" } },
   restShort(20),
   { type: "exercise", exercise: { id: "plank-mob", name: "Plank Hold", kind: "plank", duration: 30, cue: "Solid line head to heels.", equipment: "Mat" } },
 ];
