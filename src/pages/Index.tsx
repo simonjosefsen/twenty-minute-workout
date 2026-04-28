@@ -53,7 +53,7 @@ const Index = () => {
           return (
             <Link
               key={r.id}
-              to={`/workout/${r.id}`}
+              to={`/routine/${r.id}`}
               className="block group active:scale-[0.99] transition"
             >
               <div className={cn("glass-card relative overflow-hidden p-5 bg-gradient-to-br", a.ring)}>
