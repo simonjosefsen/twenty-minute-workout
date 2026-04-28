@@ -12,7 +12,9 @@ export type ExerciseKind =
   | "deadlift"
   | "stretch"
   | "shoulderTap"
-  | "halo";
+  | "halo"
+  | "march"
+  | "catCow";
 
 export type Exercise = {
   id: string;
