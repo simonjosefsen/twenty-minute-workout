@@ -81,6 +81,11 @@ const Workout = () => {
     } else {
       setRunning(true);
     }
+    if (isFirstBlockRef.current) {
+      isFirstBlockRef.current = false;
+    } else {
+      playPling();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
