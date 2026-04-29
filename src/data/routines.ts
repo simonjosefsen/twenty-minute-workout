@@ -86,11 +86,14 @@ const mobilityRound: Block[] = [
   { type: "exercise", exercise: { id: "plank-mob", name: "Plank Hold", kind: "plank", duration: 30, cue: "Solid line head to heels.", equipment: "Mat" } },
 ];
 
-const buildTwoRound = (round: Block[]): Block[] => [
-  ...round,
-  restLong(60),
-  ...round,
-];
+const buildRounds = (round: Block[], n = 3): Block[] => {
+  const out: Block[] = [];
+  for (let i = 0; i < n; i++) {
+    if (i > 0) out.push(restLong(60));
+    out.push(...round);
+  }
+  return out;
+};
 
 export const routines: Routine[] = [
   {
