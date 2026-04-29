@@ -102,7 +102,7 @@ export const routines: Routine[] = [
     tagline: "Kettlebell · Mat · 20 min",
     totalMinutes: 20,
     accent: "lime",
-    blocks: buildTwoRound(fullBodyRound),
+    blocks: buildRounds(fullBodyRound),
   },
   {
     id: "core-cond",
@@ -110,7 +110,7 @@ export const routines: Routine[] = [
     tagline: "Rope · Kettlebell · 20 min",
     totalMinutes: 20,
     accent: "cyan",
-    blocks: buildTwoRound(coreRound),
+    blocks: buildRounds(coreRound),
   },
   {
     id: "mobility",
@@ -118,7 +118,7 @@ export const routines: Routine[] = [
     tagline: "Mat · Kettlebell · 20 min",
     totalMinutes: 20,
     accent: "amber",
-    blocks: buildTwoRound(mobilityRound),
+    blocks: buildRounds(mobilityRound),
   },
 ];
 
