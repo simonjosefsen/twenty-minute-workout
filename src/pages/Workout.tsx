@@ -27,6 +27,31 @@ const Workout = () => {
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const startedAtRef = useRef<number>(Date.now());
 
+  // Simple "pling" sound using Web Audio API
+  const playPling = () => {
+    try {
+      const AudioCtx = (window.AudioContext || (window as any).webkitAudioContext);
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = "sine";
+      o.frequency.setValueAtTime(880, ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.12);
+      g.gain.setValueAtTime(0.0001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.45);
+      o.connect(g);
+      g.connect(ctx.destination);
+      o.start();
+      o.stop(ctx.currentTime + 0.5);
+      setTimeout(() => ctx.close(), 600);
+    } catch {
+      // ignore
+    }
+  };
+  const isFirstBlockRef = useRef(true);
+
   if (!routine) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -55,6 +80,11 @@ const Workout = () => {
       setRunning(false);
     } else {
       setRunning(true);
+    }
+    if (isFirstBlockRef.current) {
+      isFirstBlockRef.current = false;
+    } else {
+      playPling();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
