@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Play, Minus, Plus, Check } from "lucide-react";
+import { ArrowLeft, Play, Minus, Plus, Check, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   exerciseCatalog,
   saveCustomWorkout,
   loadCustomWorkout,
+  addSavedCustomWorkout,
   type ExerciseCategory,
 } from "@/data/routines";
 import { cn } from "@/lib/utils";
