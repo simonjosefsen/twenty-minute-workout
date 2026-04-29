@@ -246,14 +246,25 @@ const Custom = () => {
       </section>
 
       <div className="fixed bottom-0 left-0 right-0 px-6 pb-6 pt-4 bg-gradient-to-t from-background via-background/95 to-transparent">
-        <button
-          disabled={!canStart}
-          onClick={handleStart}
-          className="w-full h-14 rounded-full bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 shadow-[var(--shadow-glow)] active:scale-[0.98] transition disabled:opacity-50"
-        >
-          <Play className="h-5 w-5 fill-current" />
-          {existing ? "Save & preview" : "Create & preview"}
-        </button>
+        <div className="flex gap-3">
+          <button
+            disabled={!canStart}
+            onClick={handleSave}
+            className="h-14 px-5 rounded-full glass-card font-semibold flex items-center justify-center gap-2 active:scale-[0.98] transition disabled:opacity-50"
+            aria-label="Save workout"
+          >
+            <Save className="h-5 w-5" />
+            Save
+          </button>
+          <button
+            disabled={!canStart}
+            onClick={handleStart}
+            className="flex-1 h-14 rounded-full bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 shadow-[var(--shadow-glow)] active:scale-[0.98] transition disabled:opacity-50"
+          >
+            <Play className="h-5 w-5 fill-current" />
+            Start now
+          </button>
+        </div>
       </div>
     </div>
   );
