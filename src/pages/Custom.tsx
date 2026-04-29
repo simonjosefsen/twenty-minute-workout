@@ -26,10 +26,11 @@ const Custom = () => {
   const [selected, setSelected] = useState<Set<string>>(
     new Set(existing?.exerciseIds ?? [])
   );
-  const [rounds, setRounds] = useState<number>(existing?.rounds ?? 2);
+  const [rounds, setRounds] = useState<number>(existing?.rounds ?? 3);
   const [perRound, setPerRound] = useState<number>(
     existing?.exerciseIds.length ?? 5
   );
+  const [name, setName] = useState<string>(existing?.name ?? "My Workout");
   const [activeCat, setActiveCat] = useState<ExerciseCategory>("strength");
 
   const grouped = useMemo(() => {
@@ -62,18 +63,28 @@ const Custom = () => {
 
   const canStart = selected.size > 0 && rounds > 0;
 
+  const buildCfg = (id: string) => ({
+    id,
+    name: name.trim() || "My Workout",
+    exerciseIds: Array.from(selected),
+    rounds,
+    restBetween: 20,
+    restRound: 60,
+  });
+
   const handleStart = () => {
     if (!canStart) return;
-    const cfg = {
-      id: "custom",
-      name: "Custom Workout",
-      exerciseIds: Array.from(selected),
-      rounds,
-      restBetween: 20,
-      restRound: 60,
-    };
+    const cfg = buildCfg("custom");
     saveCustomWorkout(cfg);
     navigate(`/routine/custom`);
+  };
+
+  const handleSave = () => {
+    if (!canStart) return;
+    const id = `custom-${Date.now()}`;
+    addSavedCustomWorkout(buildCfg(id));
+    toast.success("Workout saved", { description: `"${name.trim() || "My Workout"}" is now in your library.` });
+    navigate("/");
   };
 
   const Stepper = ({
