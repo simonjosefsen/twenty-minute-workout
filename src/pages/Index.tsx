@@ -18,6 +18,7 @@ const Index = () => {
   const { thisWeek, goal, streak, fire } = computeWeeklyStreak(history);
   const progressPct = Math.min(100, (thisWeek / goal) * 100);
   const customCfg = loadCustomWorkout();
+  const [savedCustoms, setSavedCustoms] = useState(loadSavedCustomWorkouts());
 
   return (
     <div className="min-h-screen pb-12">
