@@ -237,6 +237,18 @@ export const ExerciseAnimation = ({ kind, size = 220 }: Props) => {
           <line x1="138" y1="175" x2="228" y2="175" stroke={muted} strokeWidth="2" />
         </g>
       )}
+
+      {kind === "generic" && (
+        <g>
+          {head(160, 80)}
+          <line x1="160" y1="94" x2="160" y2="140" stroke={body} strokeWidth="6" strokeLinecap="round" />
+          <line x1="160" y1="105" x2="130" y2="130" stroke={body} strokeWidth="5" strokeLinecap="round" />
+          <line x1="160" y1="105" x2="190" y2="130" stroke={body} strokeWidth="5" strokeLinecap="round" />
+          <line x1="160" y1="140" x2="140" y2="178" stroke={body} strokeWidth="6" strokeLinecap="round" />
+          <line x1="160" y1="140" x2="180" y2="178" stroke={body} strokeWidth="6" strokeLinecap="round" />
+          <circle cx="160" cy="80" r="28" fill="none" stroke={stroke} strokeWidth="2" strokeDasharray="3 5" opacity="0.5" />
+        </g>
+      )}
     </svg>
   );
 };
