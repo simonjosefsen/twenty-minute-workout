@@ -48,7 +48,16 @@ const Workout = () => {
   useEffect(() => {
     setElapsed(0);
     setReps(0);
-    setRunning(true);
+    // If this is a timed exercise that follows a rest, wait for user to press Start.
+    const prev = index > 0 ? routine.blocks[index - 1] : null;
+    const cur = routine.blocks[index];
+    const isTimedExercise = cur.type === "exercise" && typeof cur.exercise.duration === "number";
+    if (isTimedExercise && prev?.type === "rest") {
+      setRunning(false);
+    } else {
+      setRunning(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
   // Tick
