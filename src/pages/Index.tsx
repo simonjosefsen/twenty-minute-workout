@@ -84,21 +84,56 @@ const Index = () => {
           );
         })}
 
-        {/* Custom workout entry */}
+        {/* Saved custom workouts */}
+        {savedCustoms.map((c) => (
+          <div key={c.id} className="relative">
+            <Link to={`/routine/${c.id}`} className="block group active:scale-[0.99] transition">
+              <div className="glass-card relative overflow-hidden p-5 bg-gradient-to-br from-accent/30 to-transparent">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full bg-accent/15 text-accent">
+                      <Sparkles className="h-4 w-4" /> Saved
+                    </span>
+                    <h2 className="text-2xl font-bold mt-3 leading-tight truncate pr-10">{c.name}</h2>
+                    <p className="text-sm text-muted-foreground mt-1.5">
+                      {c.exerciseIds.length} exercises · {c.rounds} rounds
+                    </p>
+                  </div>
+                  <ChevronRight className="h-6 w-6 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition" />
+                </div>
+              </div>
+            </Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                if (confirm(`Delete "${c.name}"?`)) {
+                  deleteSavedCustomWorkout(c.id);
+                  setSavedCustoms(loadSavedCustomWorkouts());
+                }
+              }}
+              className="absolute top-3 right-3 h-8 w-8 inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition"
+              aria-label={`Delete ${c.name}`}
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          </div>
+        ))}
+
+        {/* Custom workout builder entry */}
         <Link to="/custom" className="block group active:scale-[0.99] transition">
-          <div className="glass-card relative overflow-hidden p-5 bg-gradient-to-br from-accent/30 to-transparent border-dashed">
+          <div className="glass-card relative overflow-hidden p-5 bg-gradient-to-br from-accent/20 to-transparent border-dashed">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full bg-accent/15 text-accent">
                   <Sparkles className="h-4 w-4" /> Custom
                 </span>
                 <h2 className="text-2xl font-bold mt-3 leading-tight">
-                  {customCfg ? customCfg.name : "Custom Workout"}
+                  {savedCustoms.length > 0 ? "Build another" : "Build a workout"}
                 </h2>
                 <p className="text-sm text-muted-foreground mt-1.5">
-                  {customCfg
-                    ? `${customCfg.exerciseIds.length} exercises · ${customCfg.rounds} rounds`
-                    : "Build your own from the exercise library."}
+                  {customCfg && savedCustoms.length === 0
+                    ? `Last: ${customCfg.exerciseIds.length} exercises · ${customCfg.rounds} rounds`
+                    : "Pick exercises from the library and save it."}
                 </p>
               </div>
               <ChevronRight className="h-6 w-6 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition" />
