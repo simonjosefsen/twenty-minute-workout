@@ -186,13 +186,23 @@ const Workout = () => {
           </Button>
 
           {isExercise ? (
-            <Button
-              size="lg"
-              className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
-              onClick={handleCheck}
-            >
-              <Check className="h-5 w-5 mr-2" /> Done
-            </Button>
+            isTimed && !running && elapsed === 0 ? (
+              <Button
+                size="lg"
+                className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
+                onClick={() => setRunning(true)}
+              >
+                <Play className="h-5 w-5 mr-2" /> Start
+              </Button>
+            ) : (
+              <Button
+                size="lg"
+                className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
+                onClick={handleCheck}
+              >
+                <Check className="h-5 w-5 mr-2" /> Done
+              </Button>
+            )
           ) : (
             <Button
               size="lg"
