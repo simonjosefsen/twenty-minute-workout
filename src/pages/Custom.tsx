@@ -151,7 +151,19 @@ const Custom = () => {
         </p>
       </section>
 
-      <section className="px-6 mt-6 flex gap-3">
+      <section className="px-6 mt-6">
+        <label className="text-[11px] uppercase tracking-widest text-muted-foreground">
+          Workout name
+        </label>
+        <Input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="My Workout"
+          className="mt-2"
+        />
+      </section>
+
+      <section className="px-6 mt-4 flex gap-3">
         <Stepper
           label="Per round"
           value={perRound}
