@@ -14,7 +14,10 @@ export type ExerciseKind =
   | "shoulderTap"
   | "halo"
   | "march"
-  | "catCow";
+  | "catCow"
+  | "generic";
+
+export type ExerciseCategory = "static" | "cardio" | "strength";
 
 export type Exercise = {
   id: string;
