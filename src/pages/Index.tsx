@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { ChevronRight, Dumbbell, Flame, Activity, Clock } from "lucide-react";
-import { routines } from "@/data/routines";
-import { useHistory, computeWeeklyStreak } from "@/lib/history";
+import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles } from "lucide-react";
+import { routines, loadCustomWorkout } from "@/data/routines";
+import { useHistory, computeWeeklyStreak, deleteHistoryEntry } from "@/lib/history";
 import { cn } from "@/lib/utils";
 
 const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }> = {
@@ -11,11 +11,12 @@ const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }>
 };
 
 const Index = () => {
-  const { history } = useHistory();
+  const { history, refresh } = useHistory();
   const today = new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
 
   const { thisWeek, goal, streak, fire } = computeWeeklyStreak(history);
   const progressPct = Math.min(100, (thisWeek / goal) * 100);
+  const customCfg = loadCustomWorkout();
 
   return (
     <div className="min-h-screen pb-12">
@@ -80,6 +81,28 @@ const Index = () => {
             </Link>
           );
         })}
+
+        {/* Custom workout entry */}
+        <Link to="/custom" className="block group active:scale-[0.99] transition">
+          <div className="glass-card relative overflow-hidden p-5 bg-gradient-to-br from-accent/30 to-transparent border-dashed">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full bg-accent/15 text-accent">
+                  <Sparkles className="h-4 w-4" /> Custom
+                </span>
+                <h2 className="text-2xl font-bold mt-3 leading-tight">
+                  {customCfg ? customCfg.name : "Custom Workout"}
+                </h2>
+                <p className="text-sm text-muted-foreground mt-1.5">
+                  {customCfg
+                    ? `${customCfg.exerciseIds.length} exercises · ${customCfg.rounds} rounds`
+                    : "Build your own from the exercise library."}
+                </p>
+              </div>
+              <ChevronRight className="h-6 w-6 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition" />
+            </div>
+          </div>
+        </Link>
       </section>
 
       {/* History */}
@@ -90,14 +113,26 @@ const Index = () => {
           </div>
           <div className="space-y-2">
             {history.slice(0, 6).map((h, i) => (
-              <div key={i} className="glass-card px-4 py-3 flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium">{h.routineName}</p>
+              <div key={`${h.date}-${i}`} className="glass-card px-4 py-3 flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium truncate">{h.routineName}</p>
                   <p className="text-xs text-muted-foreground">
                     {new Date(h.date).toLocaleDateString(undefined, { month: "short", day: "numeric" })} · {Math.round(h.durationSec / 60)} min
                   </p>
                 </div>
-                <span className="text-xs font-medium tabular-nums text-primary">{h.completed}/{h.total} ✓</span>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-xs font-medium tabular-nums text-primary">{h.completed}/{h.total} ✓</span>
+                  <button
+                    onClick={() => {
+                      deleteHistoryEntry(i);
+                      refresh();
+                    }}
+                    className="h-8 w-8 inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition"
+                    aria-label={`Delete ${h.routineName}`}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
             ))}
           </div>

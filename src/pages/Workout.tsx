@@ -48,7 +48,16 @@ const Workout = () => {
   useEffect(() => {
     setElapsed(0);
     setReps(0);
-    setRunning(true);
+    // If this is a timed exercise that follows a rest, wait for user to press Start.
+    const prev = index > 0 ? routine.blocks[index - 1] : null;
+    const cur = routine.blocks[index];
+    const isTimedExercise = cur.type === "exercise" && typeof cur.exercise.duration === "number";
+    if (isTimedExercise && prev?.type === "rest") {
+      setRunning(false);
+    } else {
+      setRunning(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
   // Tick
@@ -177,13 +186,23 @@ const Workout = () => {
           </Button>
 
           {isExercise ? (
-            <Button
-              size="lg"
-              className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
-              onClick={handleCheck}
-            >
-              <Check className="h-5 w-5 mr-2" /> Done
-            </Button>
+            isTimed && !running && elapsed === 0 ? (
+              <Button
+                size="lg"
+                className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
+                onClick={() => setRunning(true)}
+              >
+                <Play className="h-5 w-5 mr-2" /> Start
+              </Button>
+            ) : (
+              <Button
+                size="lg"
+                className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
+                onClick={handleCheck}
+              >
+                <Check className="h-5 w-5 mr-2" /> Done
+              </Button>
+            )
           ) : (
             <Button
               size="lg"

@@ -26,6 +26,12 @@ export const saveHistoryEntry = (entry: HistoryEntry) => {
   localStorage.setItem(KEY, JSON.stringify(all.slice(0, 60)));
 };
 
+export const deleteHistoryEntry = (index: number) => {
+  const all = loadHistory();
+  all.splice(index, 1);
+  localStorage.setItem(KEY, JSON.stringify(all));
+};
+
 export const useHistory = () => {
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   useEffect(() => setHistory(loadHistory()), []);
