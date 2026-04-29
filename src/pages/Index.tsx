@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { ChevronRight, Dumbbell, Flame, Activity, Clock } from "lucide-react";
-import { routines } from "@/data/routines";
-import { useHistory, computeWeeklyStreak } from "@/lib/history";
+import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles } from "lucide-react";
+import { routines, loadCustomWorkout } from "@/data/routines";
+import { useHistory, computeWeeklyStreak, deleteHistoryEntry } from "@/lib/history";
 import { cn } from "@/lib/utils";
 
 const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }> = {
@@ -11,11 +11,12 @@ const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }>
 };
 
 const Index = () => {
-  const { history } = useHistory();
+  const { history, refresh } = useHistory();
   const today = new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
 
   const { thisWeek, goal, streak, fire } = computeWeeklyStreak(history);
   const progressPct = Math.min(100, (thisWeek / goal) * 100);
+  const customCfg = loadCustomWorkout();
 
   return (
     <div className="min-h-screen pb-12">
