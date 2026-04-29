@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles } from "lucide-react";
-import { routines, loadCustomWorkout } from "@/data/routines";
+import { routines, loadCustomWorkout, loadSavedCustomWorkouts, deleteSavedCustomWorkout } from "@/data/routines";
 import { useHistory, computeWeeklyStreak, deleteHistoryEntry } from "@/lib/history";
 import { cn } from "@/lib/utils";
 
