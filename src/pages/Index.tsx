@@ -72,7 +72,7 @@ const Index = () => {
                     <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground">
                       <span className="inline-flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {r.totalMinutes} min</span>
                       <span>{r.blocks.filter((b) => b.type === "exercise").length} exercises</span>
-                      <span>2 rounds</span>
+                      <span>3 rounds</span>
                     </div>
                   </div>
                   <ChevronRight className="h-6 w-6 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition" />
