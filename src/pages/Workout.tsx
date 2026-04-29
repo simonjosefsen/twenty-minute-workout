@@ -48,11 +48,10 @@ const Workout = () => {
   useEffect(() => {
     setElapsed(0);
     setReps(0);
-    // If this is a timed exercise that follows a rest, wait for user to press Start.
-    const prev = index > 0 ? routine.blocks[index - 1] : null;
     const cur = routine.blocks[index];
     const isTimedExercise = cur.type === "exercise" && typeof cur.exercise.duration === "number";
-    if (isTimedExercise && prev?.type === "rest") {
+    // Timed exercises always wait for the user to press Start.
+    if (isTimedExercise) {
       setRunning(false);
     } else {
       setRunning(true);

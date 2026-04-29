@@ -86,11 +86,14 @@ const mobilityRound: Block[] = [
   { type: "exercise", exercise: { id: "plank-mob", name: "Plank Hold", kind: "plank", duration: 30, cue: "Solid line head to heels.", equipment: "Mat" } },
 ];
 
-const buildTwoRound = (round: Block[]): Block[] => [
-  ...round,
-  restLong(60),
-  ...round,
-];
+const buildRounds = (round: Block[], n = 3): Block[] => {
+  const out: Block[] = [];
+  for (let i = 0; i < n; i++) {
+    if (i > 0) out.push(restLong(60));
+    out.push(...round);
+  }
+  return out;
+};
 
 export const routines: Routine[] = [
   {
@@ -99,7 +102,7 @@ export const routines: Routine[] = [
     tagline: "Kettlebell · Mat · 20 min",
     totalMinutes: 20,
     accent: "lime",
-    blocks: buildTwoRound(fullBodyRound),
+    blocks: buildRounds(fullBodyRound),
   },
   {
     id: "core-cond",
@@ -107,7 +110,7 @@ export const routines: Routine[] = [
     tagline: "Rope · Kettlebell · 20 min",
     totalMinutes: 20,
     accent: "cyan",
-    blocks: buildTwoRound(coreRound),
+    blocks: buildRounds(coreRound),
   },
   {
     id: "mobility",
@@ -115,7 +118,7 @@ export const routines: Routine[] = [
     tagline: "Mat · Kettlebell · 20 min",
     totalMinutes: 20,
     accent: "amber",
-    blocks: buildTwoRound(mobilityRound),
+    blocks: buildRounds(mobilityRound),
   },
 ];
 
@@ -182,6 +185,37 @@ export const saveCustomWorkout = (cfg: CustomWorkoutConfig) => {
   localStorage.setItem(CUSTOM_KEY, JSON.stringify(cfg));
 };
 
+// ---- Saved (named) custom workouts library ----
+const SAVED_KEY = "pulse.customs.v1";
+
+export const loadSavedCustomWorkouts = (): CustomWorkoutConfig[] => {
+  try {
+    const raw = localStorage.getItem(SAVED_KEY);
+    return raw ? (JSON.parse(raw) as CustomWorkoutConfig[]) : [];
+  } catch {
+    return [];
+  }
+};
+
+export const saveSavedCustomWorkouts = (list: CustomWorkoutConfig[]) => {
+  localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+};
+
+export const addSavedCustomWorkout = (cfg: CustomWorkoutConfig): CustomWorkoutConfig => {
+  const list = loadSavedCustomWorkouts();
+  // Replace existing with same id, otherwise prepend
+  const idx = list.findIndex((c) => c.id === cfg.id);
+  if (idx >= 0) list[idx] = cfg;
+  else list.unshift(cfg);
+  saveSavedCustomWorkouts(list);
+  return cfg;
+};
+
+export const deleteSavedCustomWorkout = (id: string) => {
+  const list = loadSavedCustomWorkouts().filter((c) => c.id !== id);
+  saveSavedCustomWorkouts(list);
+};
+
 export const buildCustomRoutine = (cfg: CustomWorkoutConfig): Routine | null => {
   const exercises = cfg.exerciseIds
     .map((id) => getCatalogExercise(id))
@@ -200,7 +234,6 @@ export const buildCustomRoutine = (cfg: CustomWorkoutConfig): Routine | null => 
     blocks.push(...round);
   }
 
-  // Rough duration estimate
   const totalSec = blocks.reduce(
     (acc, b) => acc + (b.type === "rest" ? b.duration : b.exercise.duration ?? 30),
     0
@@ -223,5 +256,11 @@ export const getRoutine = (id: string): Routine | undefined => {
     const cfg = loadCustomWorkout();
     if (cfg) return buildCustomRoutine(cfg) ?? undefined;
   }
+  // Saved custom workouts have ids like "custom-<timestamp>"
+  if (id.startsWith("custom-")) {
+    const cfg = loadSavedCustomWorkouts().find((c) => c.id === id);
+    if (cfg) return buildCustomRoutine(cfg) ?? undefined;
+  }
   return undefined;
 };
+
