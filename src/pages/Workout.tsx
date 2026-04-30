@@ -235,7 +235,7 @@ const Workout = () => {
               <Button
                 size="lg"
                 className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
-                onClick={() => setRunning(true)}
+                onClick={() => { ensureAudioCtx(); setRunning(true); }}
               >
                 <Play className="h-5 w-5 mr-2" /> Start
               </Button>
