@@ -27,25 +27,41 @@ const Workout = () => {
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const startedAtRef = useRef<number>(Date.now());
 
-  // Simple "pling" sound using Web Audio API
-  const playPling = () => {
+  // Shared AudioContext (created/resumed on user interaction to satisfy autoplay policies)
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const ensureAudioCtx = () => {
     try {
       const AudioCtx = (window.AudioContext || (window as any).webkitAudioContext);
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
+      if (!AudioCtx) return null;
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new AudioCtx();
+      }
+      if (audioCtxRef.current.state === "suspended") {
+        audioCtxRef.current.resume();
+      }
+      return audioCtxRef.current;
+    } catch {
+      return null;
+    }
+  };
+
+  // Reliable "pling" using Web Audio API
+  const playPlingSound = () => {
+    try {
+      const ctx = ensureAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
       const o = ctx.createOscillator();
       const g = ctx.createGain();
       o.type = "sine";
-      o.frequency.setValueAtTime(880, ctx.currentTime);
-      o.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.12);
-      g.gain.setValueAtTime(0.0001, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.45);
+      o.frequency.setValueAtTime(880, now);
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(0.3, now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
       o.connect(g);
       g.connect(ctx.destination);
-      o.start();
-      o.stop(ctx.currentTime + 0.5);
-      setTimeout(() => ctx.close(), 600);
+      o.start(now);
+      o.stop(now + 0.22);
     } catch {
       // ignore
     }
