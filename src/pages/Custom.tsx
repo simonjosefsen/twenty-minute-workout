@@ -39,6 +39,7 @@ const Custom = () => {
       strength: [],
       cardio: [],
       static: [],
+      postpartum: [],
     };
     exerciseCatalog.forEach((e) => m[e.category].push(e));
     return m;
