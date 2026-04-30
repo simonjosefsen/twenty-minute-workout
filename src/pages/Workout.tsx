@@ -85,20 +85,6 @@ const Workout = () => {
   }, [index]);
 
   // Play pling only when a timed exercise's timer naturally reaches 0
-  useEffect(() => {
-    const cur = routine.blocks[index];
-    if (
-      cur.type === "exercise" &&
-      typeof cur.exercise.duration === "number" &&
-      isTimed &&
-      remaining === 1 &&
-      running
-    ) {
-      playPling();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [remaining, isTimed, running, index]);
-
   // Tick
   useEffect(() => {
     if (!running) return;
@@ -106,9 +92,13 @@ const Workout = () => {
     return () => clearInterval(id);
   }, [running]);
 
-  // Auto-advance for timed blocks
+  // Auto-advance for timed blocks (play pling for timed exercises right before advancing)
   useEffect(() => {
     if (isTimed && remaining === 0 && running) {
+      const cur = routine.blocks[index];
+      if (cur.type === "exercise" && typeof cur.exercise.duration === "number") {
+        playPling();
+      }
       handleNext(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
