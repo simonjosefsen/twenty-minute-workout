@@ -50,7 +50,7 @@ const Workout = () => {
       // ignore
     }
   };
-  const isFirstBlockRef = useRef(true);
+  
 
   if (!routine) {
     return (
