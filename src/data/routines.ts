@@ -120,6 +120,23 @@ export const routines: Routine[] = [
     accent: "amber",
     blocks: buildRounds(mobilityRound),
   },
+  {
+    id: "emom-15",
+    name: "EMOM 15 – No Equipment",
+    tagline: "Bodyweight · 15 min · 5 rounds",
+    totalMinutes: 15,
+    accent: "amber",
+    blocks: (() => {
+      const round: Block[] = [
+        { type: "exercise", exercise: { id: "emom-pushup", name: "Push-ups (12 reps)", kind: "pushup", duration: 60, cue: "Complete 12 reps, then rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-squat", name: "Air Squats (20 reps)", kind: "squat", duration: 60, cue: "Complete 20 reps, then rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-situp", name: "Sit-ups (15 reps)", kind: "generic", duration: 60, cue: "Complete 15 reps, then rest the remainder of the minute.", equipment: "Mat" } },
+      ];
+      const out: Block[] = [];
+      for (let i = 0; i < 5; i++) out.push(...round);
+      return out;
+    })(),
+  },
 ];
 
 // ---- Catalog of selectable exercises for Custom Workout ----
