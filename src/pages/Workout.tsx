@@ -91,7 +91,7 @@ const Workout = () => {
       cur.type === "exercise" &&
       typeof cur.exercise.duration === "number" &&
       isTimed &&
-      remaining === 0 &&
+      remaining === 1 &&
       running
     ) {
       playPling();
