@@ -91,16 +91,15 @@ const Workout = () => {
     setReps(0);
     const cur = routine.blocks[index];
     const isTimedExercise = cur.type === "exercise" && typeof cur.exercise.duration === "number";
-    // Timed exercises always wait for the user to press Start.
+    // EMOM 15 auto-starts each timed exercise; other timed exercises wait for Start.
     if (isTimedExercise) {
-      setRunning(false);
+      setRunning(routine.id === "emom-15");
     } else {
       setRunning(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
-  // Play pling only when a timed exercise's timer naturally reaches 0
   // Tick
   useEffect(() => {
     if (!running) return;
@@ -113,7 +112,8 @@ const Workout = () => {
     if (isTimed && remaining === 0 && running) {
       const cur = routine.blocks[index];
       if (cur.type === "exercise" && typeof cur.exercise.duration === "number") {
-        playPling();
+        console.log("PLING TIMER COMPLETE");
+        playPlingSound();
       }
       handleNext(true);
     }
