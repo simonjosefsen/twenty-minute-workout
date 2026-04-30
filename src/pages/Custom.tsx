@@ -17,6 +17,7 @@ const CATS: { id: ExerciseCategory; label: string }[] = [
   { id: "strength", label: "Strength" },
   { id: "cardio", label: "Cardio" },
   { id: "static", label: "Static" },
+  { id: "postpartum", label: "Postpartum" },
 ];
 
 const Custom = () => {
