@@ -276,18 +276,92 @@ export const buildCustomRoutine = (cfg: CustomWorkoutConfig): Routine | null => 
   };
 };
 
+// ---- Session-only exercise order override (cleared on reload) ----
+const SESSION_ORDER_PREFIX = "pulse.session-order.";
+
+export const setSessionExerciseOrder = (routineId: string, exerciseIds: string[]) => {
+  try {
+    sessionStorage.setItem(SESSION_ORDER_PREFIX + routineId, JSON.stringify(exerciseIds));
+  } catch {
+    // ignore
+  }
+};
+
+export const clearSessionExerciseOrder = (routineId: string) => {
+  try {
+    sessionStorage.removeItem(SESSION_ORDER_PREFIX + routineId);
+  } catch {
+    // ignore
+  }
+};
+
+const loadSessionExerciseOrder = (routineId: string): string[] | null => {
+  try {
+    const raw = sessionStorage.getItem(SESSION_ORDER_PREFIX + routineId);
+    return raw ? (JSON.parse(raw) as string[]) : null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Reorder a routine's exercise blocks per round to match the given exercise id order.
+ * Rest blocks remain in place. The order list represents one round of exercises.
+ */
+const applyExerciseOrder = (routine: Routine, order: string[]): Routine => {
+  // Split blocks into rounds by "Round break"
+  const rounds: Block[][] = [[]];
+  routine.blocks.forEach((b) => {
+    if (b.type === "rest" && b.label === "Round break") {
+      rounds.push([]);
+    } else {
+      rounds[rounds.length - 1].push(b);
+    }
+  });
+
+  const reorderedRounds = rounds.map((round) => {
+    const exercises = round.filter((b): b is Extract<Block, { type: "exercise" }> => b.type === "exercise");
+    const byId = new Map(exercises.map((e) => [e.exercise.id, e]));
+    const newExercises: typeof exercises = [];
+    order.forEach((id) => {
+      const found = byId.get(id);
+      if (found) newExercises.push(found);
+    });
+    // Append any exercises not in order list (safety)
+    exercises.forEach((e) => {
+      if (!order.includes(e.exercise.id)) newExercises.push(e);
+    });
+    // Rebuild round: walk original, replacing exercises sequentially with newExercises
+    let ei = 0;
+    return round.map((b) => (b.type === "exercise" ? newExercises[ei++] ?? b : b));
+  });
+
+  const blocks: Block[] = [];
+  reorderedRounds.forEach((r, i) => {
+    if (i > 0) blocks.push({ type: "rest", duration: 60, label: "Round break" });
+    blocks.push(...r);
+  });
+
+  return { ...routine, blocks };
+};
+
 export const getRoutine = (id: string): Routine | undefined => {
+  let routine: Routine | undefined;
   const found = routines.find((r) => r.id === id);
-  if (found) return found;
-  if (id === "custom") {
+  if (found) routine = found;
+  else if (id === "custom") {
     const cfg = loadCustomWorkout();
-    if (cfg) return buildCustomRoutine(cfg) ?? undefined;
-  }
-  // Saved custom workouts have ids like "custom-<timestamp>"
-  if (id.startsWith("custom-")) {
+    if (cfg) routine = buildCustomRoutine(cfg) ?? undefined;
+  } else if (id.startsWith("custom-")) {
     const cfg = loadSavedCustomWorkouts().find((c) => c.id === id);
-    if (cfg) return buildCustomRoutine(cfg) ?? undefined;
+    if (cfg) routine = buildCustomRoutine(cfg) ?? undefined;
   }
-  return undefined;
+  if (!routine) return undefined;
+
+  const order = loadSessionExerciseOrder(id);
+  if (order && order.length > 0) {
+    return applyExerciseOrder(routine, order);
+  }
+  return routine;
 };
 
