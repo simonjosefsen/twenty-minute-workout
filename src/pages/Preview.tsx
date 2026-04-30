@@ -1,6 +1,7 @@
+import { useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Clock, Play, Repeat, Coffee } from "lucide-react";
-import { getRoutine } from "@/data/routines";
+import { ArrowLeft, Clock, Play, Repeat, Coffee, ArrowUp, ArrowDown } from "lucide-react";
+import { getRoutine, setSessionExerciseOrder, clearSessionExerciseOrder } from "@/data/routines";
 import { ExerciseAnimation } from "@/components/ExerciseAnimation";
 
 const formatDuration = (sec: number) => {
