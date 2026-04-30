@@ -50,7 +50,7 @@ const Workout = () => {
       // ignore
     }
   };
-  const isFirstBlockRef = useRef(true);
+  
 
   if (!routine) {
     return (
@@ -81,13 +81,23 @@ const Workout = () => {
     } else {
       setRunning(true);
     }
-    if (isFirstBlockRef.current) {
-      isFirstBlockRef.current = false;
-    } else {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index]);
+
+  // Play pling only when a timed exercise's timer naturally reaches 0
+  useEffect(() => {
+    const cur = routine.blocks[index];
+    if (
+      cur.type === "exercise" &&
+      typeof cur.exercise.duration === "number" &&
+      isTimed &&
+      remaining === 0 &&
+      running
+    ) {
       playPling();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index]);
+  }, [remaining, isTimed, running, index]);
 
   // Tick
   useEffect(() => {

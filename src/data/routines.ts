@@ -17,7 +17,7 @@ export type ExerciseKind =
   | "catCow"
   | "generic";
 
-export type ExerciseCategory = "static" | "cardio" | "strength";
+export type ExerciseCategory = "static" | "cardio" | "strength" | "postpartum";
 
 export type Exercise = {
   id: string;
@@ -120,6 +120,23 @@ export const routines: Routine[] = [
     accent: "amber",
     blocks: buildRounds(mobilityRound),
   },
+  {
+    id: "emom-15",
+    name: "EMOM 15 – No Equipment",
+    tagline: "Bodyweight · 15 min · 5 rounds",
+    totalMinutes: 15,
+    accent: "amber",
+    blocks: (() => {
+      const round: Block[] = [
+        { type: "exercise", exercise: { id: "emom-pushup", name: "Push-ups (12 reps)", kind: "pushup", duration: 60, cue: "Complete 12 reps, then rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-squat", name: "Air Squats (20 reps)", kind: "squat", duration: 60, cue: "Complete 20 reps, then rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-situp", name: "Sit-ups (15 reps)", kind: "generic", duration: 60, cue: "Complete 15 reps, then rest the remainder of the minute.", equipment: "Mat" } },
+      ];
+      const out: Block[] = [];
+      for (let i = 0; i < 5; i++) out.push(...round);
+      return out;
+    })(),
+  },
 ];
 
 // ---- Catalog of selectable exercises for Custom Workout ----
@@ -156,6 +173,16 @@ export const exerciseCatalog: CatalogExercise[] = [
   { id: "rot-mt-climber", name: "Rotating Mountain Climber", kind: "generic", duration: 30, cue: "Drive knee toward opposite elbow.", equipment: "Mat", category: "cardio" },
   { id: "leg-raise", name: "Floor Leg Raise", kind: "generic", reps: 12, cue: "Lower legs slowly, keep low back pressed down.", equipment: "Mat", category: "strength" },
   { id: "ab-pendulum", name: "Bent Knees Ab Pendulum", kind: "generic", reps: 16, cue: "Knees bent, swing legs side to side under control.", equipment: "Mat", category: "strength" },
+
+  // ---- Postpartum (gentle, no equipment, no jumping) ----
+  { id: "pp-deep-breathing", name: "Deep Breathing", kind: "generic", duration: 45, cue: "Lie on your back with bent knees. Breathe slowly into your belly and gently activate your core on the exhale.", equipment: "—", category: "postpartum" },
+  { id: "pp-pelvic-tilts", name: "Pelvic Tilts", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Slowly tilt your pelvis to gently flatten your lower back into the floor, then release.", equipment: "—", category: "postpartum" },
+  { id: "pp-glute-bridge", name: "Glute Bridge", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Press through your feet and lift your hips, then lower slowly.", equipment: "—", category: "postpartum" },
+  { id: "pp-heel-slides", name: "Heel Slides", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Slowly slide one heel away from you, then bring it back. Switch sides.", equipment: "—", category: "postpartum" },
+  { id: "pp-bird-dog", name: "Bird Dog", kind: "generic", reps: 10, cue: "Start on hands and knees. Extend opposite arm and leg while keeping your hips stable.", equipment: "—", category: "postpartum" },
+  { id: "pp-dead-bug", name: "Dead Bug", kind: "generic", reps: 10, cue: "Lie on your back with arms and legs raised. Slowly lower opposite arm and leg while keeping your lower back supported.", equipment: "—", category: "postpartum" },
+  { id: "pp-side-leg-lift", name: "Side-Lying Leg Lift", kind: "generic", reps: 12, cue: "Lie on your side and slowly lift the top leg, then lower with control.", equipment: "—", category: "postpartum" },
+  { id: "pp-cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "Start on hands and knees. Slowly round and arch your back with your breath.", equipment: "—", category: "postpartum" },
 ];
 
 export const getCatalogExercise = (id: string) => exerciseCatalog.find((e) => e.id === id);
@@ -249,18 +276,92 @@ export const buildCustomRoutine = (cfg: CustomWorkoutConfig): Routine | null => 
   };
 };
 
+// ---- Session-only exercise order override (cleared on reload) ----
+const SESSION_ORDER_PREFIX = "pulse.session-order.";
+
+export const setSessionExerciseOrder = (routineId: string, exerciseIds: string[]) => {
+  try {
+    sessionStorage.setItem(SESSION_ORDER_PREFIX + routineId, JSON.stringify(exerciseIds));
+  } catch {
+    // ignore
+  }
+};
+
+export const clearSessionExerciseOrder = (routineId: string) => {
+  try {
+    sessionStorage.removeItem(SESSION_ORDER_PREFIX + routineId);
+  } catch {
+    // ignore
+  }
+};
+
+const loadSessionExerciseOrder = (routineId: string): string[] | null => {
+  try {
+    const raw = sessionStorage.getItem(SESSION_ORDER_PREFIX + routineId);
+    return raw ? (JSON.parse(raw) as string[]) : null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Reorder a routine's exercise blocks per round to match the given exercise id order.
+ * Rest blocks remain in place. The order list represents one round of exercises.
+ */
+const applyExerciseOrder = (routine: Routine, order: string[]): Routine => {
+  // Split blocks into rounds by "Round break"
+  const rounds: Block[][] = [[]];
+  routine.blocks.forEach((b) => {
+    if (b.type === "rest" && b.label === "Round break") {
+      rounds.push([]);
+    } else {
+      rounds[rounds.length - 1].push(b);
+    }
+  });
+
+  const reorderedRounds = rounds.map((round) => {
+    const exercises = round.filter((b): b is Extract<Block, { type: "exercise" }> => b.type === "exercise");
+    const byId = new Map(exercises.map((e) => [e.exercise.id, e]));
+    const newExercises: typeof exercises = [];
+    order.forEach((id) => {
+      const found = byId.get(id);
+      if (found) newExercises.push(found);
+    });
+    // Append any exercises not in order list (safety)
+    exercises.forEach((e) => {
+      if (!order.includes(e.exercise.id)) newExercises.push(e);
+    });
+    // Rebuild round: walk original, replacing exercises sequentially with newExercises
+    let ei = 0;
+    return round.map((b) => (b.type === "exercise" ? newExercises[ei++] ?? b : b));
+  });
+
+  const blocks: Block[] = [];
+  reorderedRounds.forEach((r, i) => {
+    if (i > 0) blocks.push({ type: "rest", duration: 60, label: "Round break" });
+    blocks.push(...r);
+  });
+
+  return { ...routine, blocks };
+};
+
 export const getRoutine = (id: string): Routine | undefined => {
+  let routine: Routine | undefined;
   const found = routines.find((r) => r.id === id);
-  if (found) return found;
-  if (id === "custom") {
+  if (found) routine = found;
+  else if (id === "custom") {
     const cfg = loadCustomWorkout();
-    if (cfg) return buildCustomRoutine(cfg) ?? undefined;
-  }
-  // Saved custom workouts have ids like "custom-<timestamp>"
-  if (id.startsWith("custom-")) {
+    if (cfg) routine = buildCustomRoutine(cfg) ?? undefined;
+  } else if (id.startsWith("custom-")) {
     const cfg = loadSavedCustomWorkouts().find((c) => c.id === id);
-    if (cfg) return buildCustomRoutine(cfg) ?? undefined;
+    if (cfg) routine = buildCustomRoutine(cfg) ?? undefined;
   }
-  return undefined;
+  if (!routine) return undefined;
+
+  const order = loadSessionExerciseOrder(id);
+  if (order && order.length > 0) {
+    return applyExerciseOrder(routine, order);
+  }
+  return routine;
 };
 
