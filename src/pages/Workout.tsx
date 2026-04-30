@@ -27,25 +27,41 @@ const Workout = () => {
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const startedAtRef = useRef<number>(Date.now());
 
-  // Simple "pling" sound using Web Audio API
-  const playPling = () => {
+  // Shared AudioContext (created/resumed on user interaction to satisfy autoplay policies)
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const ensureAudioCtx = () => {
     try {
       const AudioCtx = (window.AudioContext || (window as any).webkitAudioContext);
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
+      if (!AudioCtx) return null;
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new AudioCtx();
+      }
+      if (audioCtxRef.current.state === "suspended") {
+        audioCtxRef.current.resume();
+      }
+      return audioCtxRef.current;
+    } catch {
+      return null;
+    }
+  };
+
+  // Reliable "pling" using Web Audio API
+  const playPlingSound = () => {
+    try {
+      const ctx = ensureAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
       const o = ctx.createOscillator();
       const g = ctx.createGain();
       o.type = "sine";
-      o.frequency.setValueAtTime(880, ctx.currentTime);
-      o.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.12);
-      g.gain.setValueAtTime(0.0001, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.45);
+      o.frequency.setValueAtTime(880, now);
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(0.3, now + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
       o.connect(g);
       g.connect(ctx.destination);
-      o.start();
-      o.stop(ctx.currentTime + 0.5);
-      setTimeout(() => ctx.close(), 600);
+      o.start(now);
+      o.stop(now + 0.22);
     } catch {
       // ignore
     }
@@ -75,16 +91,15 @@ const Workout = () => {
     setReps(0);
     const cur = routine.blocks[index];
     const isTimedExercise = cur.type === "exercise" && typeof cur.exercise.duration === "number";
-    // Timed exercises always wait for the user to press Start.
+    // EMOM 15 auto-starts each timed exercise; other timed exercises wait for Start.
     if (isTimedExercise) {
-      setRunning(false);
+      setRunning(routine.id === "emom-15");
     } else {
       setRunning(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
-  // Play pling only when a timed exercise's timer naturally reaches 0
   // Tick
   useEffect(() => {
     if (!running) return;
@@ -97,7 +112,8 @@ const Workout = () => {
     if (isTimed && remaining === 0 && running) {
       const cur = routine.blocks[index];
       if (cur.type === "exercise" && typeof cur.exercise.duration === "number") {
-        playPling();
+        console.log("PLING TIMER COMPLETE");
+        playPlingSound();
       }
       handleNext(true);
     }
@@ -219,7 +235,7 @@ const Workout = () => {
               <Button
                 size="lg"
                 className="flex-1 rounded-full h-14 text-base font-semibold pulse-ring"
-                onClick={() => setRunning(true)}
+                onClick={() => { ensureAudioCtx(); setRunning(true); }}
               >
                 <Play className="h-5 w-5 mr-2" /> Start
               </Button>
