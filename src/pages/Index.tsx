@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles } from "lucide-react";
 import { routines, loadCustomWorkout, loadSavedCustomWorkouts, deleteSavedCustomWorkout } from "@/data/routines";
 import { useHistory, computeWeeklyStreak, deleteHistoryEntry } from "@/lib/history";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+
+const FEATURED_IDS = ["full-body", "emom-15", "mobility"];
 
 const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }> = {
   lime: { ring: "from-primary/40 to-transparent", chip: "bg-primary/15 text-primary", icon: <Flame className="h-5 w-5" /> },
