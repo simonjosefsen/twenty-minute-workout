@@ -17,7 +17,7 @@ export type ExerciseKind =
   | "catCow"
   | "generic";
 
-export type ExerciseCategory = "static" | "cardio" | "strength";
+export type ExerciseCategory = "static" | "cardio" | "strength" | "postpartum";
 
 export type Exercise = {
   id: string;
