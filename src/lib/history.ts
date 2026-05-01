@@ -49,8 +49,28 @@ export const startOfWeekSunday = (date: Date): Date => {
   return d;
 };
 
-const WEEKLY_GOAL = 2;
+const WEEKLY_GOAL_KEY = "weeklyGoal";
+const DEFAULT_WEEKLY_GOAL = 2;
 const FIRE_THRESHOLD = 3;
+
+export const loadWeeklyGoal = (): number | null => {
+  try {
+    const raw = localStorage.getItem(WEEKLY_GOAL_KEY);
+    if (!raw) return null;
+    const n = parseInt(raw, 10);
+    return Number.isFinite(n) && n > 0 ? n : null;
+  } catch {
+    return null;
+  }
+};
+
+export const saveWeeklyGoal = (goal: number) => {
+  try {
+    localStorage.setItem(WEEKLY_GOAL_KEY, String(goal));
+  } catch {
+    // ignore
+  }
+};
 
 export type WeeklyStreak = {
   /** Sessions completed in the current week (Sun → next Sun). */
