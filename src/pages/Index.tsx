@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles } from "lucide-react";
 import { routines, loadCustomWorkout, loadSavedCustomWorkouts, deleteSavedCustomWorkout } from "@/data/routines";
-import { useHistory, computeWeeklyStreak, deleteHistoryEntry } from "@/lib/history";
+import { useHistory, computeWeeklyStreak, deleteHistoryEntry, loadWeeklyGoal, saveWeeklyGoal } from "@/lib/history";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const FEATURED_IDS = ["full-body", "emom-15", "mobility"];
