@@ -51,7 +51,6 @@ export const startOfWeekSunday = (date: Date): Date => {
 
 const WEEKLY_GOAL_KEY = "weeklyGoal";
 const DEFAULT_WEEKLY_GOAL = 2;
-const FIRE_THRESHOLD = 3;
 
 export const loadWeeklyGoal = (): number | null => {
   try {
@@ -106,11 +105,12 @@ export const computeWeeklyStreak = (
     cursor.setDate(cursor.getDate() - 7);
   }
 
-  // Flame carries from last *completed* week if it had >= 3 sessions.
+  // Flame triggers when user exceeds their weekly goal by one (goal + 1).
+  const fireThreshold = goal + 1;
   const lastWeekStart = new Date(thisWeekStart);
   lastWeekStart.setDate(lastWeekStart.getDate() - 7);
   const lastWeekCount = counts.get(lastWeekStart.getTime()) ?? 0;
-  const fire = lastWeekCount >= FIRE_THRESHOLD || thisWeek >= FIRE_THRESHOLD;
+  const fire = lastWeekCount >= fireThreshold || thisWeek >= fireThreshold;
 
   return { thisWeek, goal, streak, fire };
 };

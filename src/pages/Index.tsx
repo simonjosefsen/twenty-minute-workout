@@ -83,7 +83,7 @@ const Index = () => {
           <p className="text-[11px] uppercase tracking-widest text-muted-foreground">This week</p>
           <p className="text-3xl font-bold mt-1 flex items-baseline gap-1 tabular-nums">
             {thisWeek}<span className="text-muted-foreground">/{goal}</span>
-            {thisWeek >= 3 && <span className="text-2xl ml-1" aria-label="On fire">🔥</span>}
+            {thisWeek >= goal + 1 && <span className="text-2xl ml-1" aria-label="On fire">🔥</span>}
           </p>
           <div className="mt-2 h-1.5 rounded-full bg-secondary/60 overflow-hidden">
             <div
