@@ -66,7 +66,7 @@ const Index = () => {
       <header className="px-6 pt-8 pb-4">
         <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{today}</p>
         <h1 className="text-4xl font-bold mt-1.5">Pulse</h1>
-        <p className="text-muted-foreground mt-1">Pick your 20-minute session.</p>
+        <p className="text-muted-foreground mt-1">Pick your daily workout</p>
       </header>
 
       {/* Stats */}
