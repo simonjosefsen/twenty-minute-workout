@@ -92,8 +92,9 @@ const Workout = () => {
     const cur = routine.blocks[index];
     const isTimedExercise = cur.type === "exercise" && typeof cur.exercise.duration === "number";
     // EMOM 15 auto-starts each timed exercise; other timed exercises wait for Start.
+    const isEmom = routine.id === "emom-15" || /emom\s*15/i.test(routine.name);
     if (isTimedExercise) {
-      setRunning(routine.id === "emom-15");
+      setRunning(isEmom);
     } else {
       setRunning(true);
     }
