@@ -121,6 +121,25 @@ export const routines: Routine[] = [
     blocks: buildRounds(mobilityRound),
   },
   {
+    id: "emom-15-full-body",
+    name: "EMOM 15 – Full Body Builder",
+    tagline: "Bodyweight · 15 min · 3 rounds",
+    totalMinutes: 15,
+    accent: "lime",
+    blocks: (() => {
+      const round: Block[] = [
+        { type: "exercise", exercise: { id: "emom-fb-squat", name: "Squats (20 reps)", kind: "squat", duration: 60, cue: "Complete 20 reps, then rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-fb-pushup", name: "Push-ups (12–15 reps)", kind: "pushup", duration: 60, cue: "Complete 12–15 reps, then rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-fb-lunge", name: "Reverse Lunges (20 reps total)", kind: "lunge", duration: 60, cue: "20 reps total, alternating legs. Rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-fb-ab", name: "Bent Knee Ab (15–20 reps)", kind: "crunch", duration: 60, cue: "Complete 15–20 reps, then rest the remainder of the minute.", equipment: "Mat" } },
+        { type: "exercise", exercise: { id: "emom-fb-burpee", name: "Burpees (8–12 reps)", kind: "generic", duration: 60, cue: "Complete 8–12 reps, then rest the remainder of the minute.", equipment: "—" } },
+      ];
+      const out: Block[] = [];
+      for (let i = 0; i < 3; i++) out.push(...round);
+      return out;
+    })(),
+  },
+  {
     id: "emom-15",
     name: "EMOM 15 – No Equipment",
     tagline: "Bodyweight · 15 min · 5 rounds",
