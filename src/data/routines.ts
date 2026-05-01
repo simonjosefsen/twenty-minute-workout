@@ -122,7 +122,7 @@ export const routines: Routine[] = [
   },
   {
     id: "emom-15-full-body",
-    name: "EMOM 15 – Full Body Builder",
+    name: "EMOM 15 – Daily CrossFit (no equipment)",
     tagline: "Bodyweight · 15 min · 3 rounds",
     totalMinutes: 15,
     accent: "lime",

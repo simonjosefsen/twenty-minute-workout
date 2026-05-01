@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const FEATURED_IDS = ["full-body", "emom-15", "mobility"];
+const FEATURED_IDS = ["full-body", "emom-15-full-body", "mobility"];
 
 const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }> = {
   lime: { ring: "from-primary/40 to-transparent", chip: "bg-primary/15 text-primary", icon: <Flame className="h-5 w-5" /> },
