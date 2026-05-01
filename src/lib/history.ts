@@ -49,8 +49,28 @@ export const startOfWeekSunday = (date: Date): Date => {
   return d;
 };
 
-const WEEKLY_GOAL = 2;
+const WEEKLY_GOAL_KEY = "weeklyGoal";
+const DEFAULT_WEEKLY_GOAL = 2;
 const FIRE_THRESHOLD = 3;
+
+export const loadWeeklyGoal = (): number | null => {
+  try {
+    const raw = localStorage.getItem(WEEKLY_GOAL_KEY);
+    if (!raw) return null;
+    const n = parseInt(raw, 10);
+    return Number.isFinite(n) && n > 0 ? n : null;
+  } catch {
+    return null;
+  }
+};
+
+export const saveWeeklyGoal = (goal: number) => {
+  try {
+    localStorage.setItem(WEEKLY_GOAL_KEY, String(goal));
+  } catch {
+    // ignore
+  }
+};
 
 export type WeeklyStreak = {
   /** Sessions completed in the current week (Sun → next Sun). */
@@ -80,7 +100,8 @@ export const computeWeeklyStreak = (
   let streak = 0;
   const cursor = new Date(thisWeekStart);
   cursor.setDate(cursor.getDate() - 7);
-  while ((counts.get(cursor.getTime()) ?? 0) >= WEEKLY_GOAL) {
+  const goal = loadWeeklyGoal() ?? DEFAULT_WEEKLY_GOAL;
+  while ((counts.get(cursor.getTime()) ?? 0) >= goal) {
     streak++;
     cursor.setDate(cursor.getDate() - 7);
   }
@@ -91,5 +112,5 @@ export const computeWeeklyStreak = (
   const lastWeekCount = counts.get(lastWeekStart.getTime()) ?? 0;
   const fire = lastWeekCount >= FIRE_THRESHOLD || thisWeek >= FIRE_THRESHOLD;
 
-  return { thisWeek, goal: WEEKLY_GOAL, streak, fire };
+  return { thisWeek, goal, streak, fire };
 };

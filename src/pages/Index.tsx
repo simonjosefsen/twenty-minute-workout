@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles } from "lucide-react";
 import { routines, loadCustomWorkout, loadSavedCustomWorkouts, deleteSavedCustomWorkout } from "@/data/routines";
-import { useHistory, computeWeeklyStreak, deleteHistoryEntry } from "@/lib/history";
+import { useHistory, computeWeeklyStreak, deleteHistoryEntry, loadWeeklyGoal, saveWeeklyGoal } from "@/lib/history";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const FEATURED_IDS = ["full-body", "emom-15", "mobility"];
@@ -23,8 +25,44 @@ const Index = () => {
   const customCfg = loadCustomWorkout();
   const [savedCustoms, setSavedCustoms] = useState(loadSavedCustomWorkouts());
 
+  // First-time onboarding: ask for weekly goal if none saved
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  useEffect(() => {
+    if (loadWeeklyGoal() === null) setShowOnboarding(true);
+  }, []);
+  const handleSelectGoal = (g: number) => {
+    saveWeeklyGoal(g);
+    setShowOnboarding(false);
+    refresh();
+  };
+
   return (
     <div className="min-h-screen pb-12">
+      <Dialog open={showOnboarding}>
+        <DialogContent
+          className="max-w-sm"
+          onInteractOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
+        >
+          <DialogHeader>
+            <DialogTitle className="text-2xl">Welcome to Pulse</DialogTitle>
+            <DialogDescription>Set your weekly workout goal</DialogDescription>
+          </DialogHeader>
+          <div className="grid grid-cols-2 gap-3 mt-2">
+            {[2, 3, 4, 5].map((g) => (
+              <Button
+                key={g}
+                variant="secondary"
+                className="h-16 text-lg font-semibold rounded-xl"
+                onClick={() => handleSelectGoal(g)}
+              >
+                {g} <span className="text-sm text-muted-foreground ml-1.5">/ week</span>
+              </Button>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <header className="px-6 pt-8 pb-4">
         <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">{today}</p>
         <h1 className="text-4xl font-bold mt-1.5">Pulse</h1>
