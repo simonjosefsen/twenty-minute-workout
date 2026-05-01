@@ -100,7 +100,8 @@ export const computeWeeklyStreak = (
   let streak = 0;
   const cursor = new Date(thisWeekStart);
   cursor.setDate(cursor.getDate() - 7);
-  while ((counts.get(cursor.getTime()) ?? 0) >= WEEKLY_GOAL) {
+  const goal = loadWeeklyGoal() ?? DEFAULT_WEEKLY_GOAL;
+  while ((counts.get(cursor.getTime()) ?? 0) >= goal) {
     streak++;
     cursor.setDate(cursor.getDate() - 7);
   }
@@ -111,5 +112,5 @@ export const computeWeeklyStreak = (
   const lastWeekCount = counts.get(lastWeekStart.getTime()) ?? 0;
   const fire = lastWeekCount >= FIRE_THRESHOLD || thisWeek >= FIRE_THRESHOLD;
 
-  return { thisWeek, goal: WEEKLY_GOAL, streak, fire };
+  return { thisWeek, goal, streak, fire };
 };
