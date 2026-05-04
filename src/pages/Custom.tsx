@@ -35,6 +35,14 @@ const Custom = () => {
   );
   const [name, setName] = useState<string>(existing?.name ?? "My Workout");
   const [activeCat, setActiveCat] = useState<ExerciseCategory>("strength");
+  const [equipment, setEquipment] = useState<Record<EquipmentType, boolean>>({
+    bodyweight: true,
+    kettlebell: true,
+    dumbbell: true,
+  });
+
+  const toggleEquipment = (type: EquipmentType) =>
+    setEquipment((prev) => ({ ...prev, [type]: !prev[type] }));
 
   const grouped = useMemo(() => {
     const m: Record<ExerciseCategory, typeof exerciseCatalog> = {
