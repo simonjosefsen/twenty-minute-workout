@@ -193,6 +193,14 @@ export const exerciseCatalog: CatalogExercise[] = [
   { id: "leg-raise", name: "Floor Leg Raise", kind: "generic", reps: 12, cue: "Lower legs slowly, keep low back pressed down.", equipment: "Mat", category: "strength" },
   { id: "ab-pendulum", name: "Bent Knees Ab Pendulum", kind: "generic", reps: 16, cue: "Knees bent, swing legs side to side under control.", equipment: "Mat", category: "strength" },
 
+  // ---- Dumbbell ----
+  { id: "db-squat", name: "Dumbbell Squat", kind: "squat", reps: 12, cue: "Stand with feet shoulder-width apart holding dumbbells. Lower your hips into a squat, then stand back up. Keep your chest upright.", equipment: "Dumbbell", category: "strength" },
+  { id: "db-lunges", name: "Dumbbell Lunges", kind: "lunge", reps: 12, cue: "Step forward into a lunge while holding dumbbells. Lower your back knee toward the floor, then push back up. Alternate legs.", equipment: "Dumbbell", category: "strength" },
+  { id: "db-shoulder-press", name: "Dumbbell Shoulder Press", kind: "generic", reps: 10, cue: "Hold dumbbells at shoulder height. Press them overhead until arms are extended, then lower with control.", equipment: "Dumbbell", category: "strength" },
+  { id: "db-bent-row", name: "Dumbbell Bent Over Row", kind: "row", reps: 10, cue: "Hinge at the hips with a flat back. Pull the dumbbells toward your torso, then lower slowly.", equipment: "Dumbbell", category: "strength" },
+  { id: "db-deadlift", name: "Dumbbell Deadlift", kind: "deadlift", reps: 12, cue: "Hold dumbbells in front of your legs. Hinge at the hips and lower them down your thighs, then stand back up.", equipment: "Dumbbell", category: "strength" },
+  { id: "db-russian-twist", name: "Dumbbell Russian Twist", kind: "twist", reps: 20, cue: "Sit with feet slightly off the ground. Hold a dumbbell and rotate side to side, keeping your core engaged.", equipment: "Dumbbell", category: "strength" },
+
   // ---- Postpartum (gentle, no equipment, no jumping) ----
   { id: "pp-deep-breathing", name: "Deep Breathing", kind: "generic", duration: 45, cue: "Lie on your back with bent knees. Breathe slowly into your belly and gently activate your core on the exhale.", equipment: "—", category: "postpartum" },
   { id: "pp-pelvic-tilts", name: "Pelvic Tilts", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Slowly tilt your pelvis to gently flatten your lower back into the floor, then release.", equipment: "—", category: "postpartum" },
@@ -382,5 +390,15 @@ export const getRoutine = (id: string): Routine | undefined => {
     return applyExerciseOrder(routine, order);
   }
   return routine;
+};
+
+export type EquipmentType = "bodyweight" | "kettlebell" | "dumbbell";
+
+/** Normalize an exercise's equipment string to one of the filterable equipment types. */
+export const getEquipmentType = (equipment?: string): EquipmentType => {
+  const e = (equipment ?? "").toLowerCase();
+  if (e.includes("kettlebell")) return "kettlebell";
+  if (e.includes("dumbbell")) return "dumbbell";
+  return "bodyweight";
 };
 
