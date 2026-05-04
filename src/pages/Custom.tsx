@@ -255,15 +255,6 @@ const Custom = () => {
                     "w-full text-left glass-card p-3 flex items-center gap-3 transition",
                     isOn && "ring-2 ring-primary"
                   )}
-            const isOn = selected.has(ex.id);
-            return (
-              <li key={ex.id}>
-                <button
-                  onClick={() => toggle(ex.id)}
-                  className={cn(
-                    "w-full text-left glass-card p-3 flex items-center gap-3 transition",
-                    isOn && "ring-2 ring-primary"
-                  )}
                 >
                   <div
                     className={cn(
