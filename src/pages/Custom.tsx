@@ -217,8 +217,44 @@ const Custom = () => {
           ))}
         </div>
 
+        <div className="flex flex-wrap gap-2 mb-4">
+          {([
+            { id: "bodyweight", label: "Bodyweight" },
+            { id: "kettlebell", label: "Kettlebell" },
+            { id: "dumbbell", label: "Dumbbell" },
+          ] as { id: EquipmentType; label: string }[]).map((eq) => {
+            const on = equipment[eq.id];
+            return (
+              <button
+                key={eq.id}
+                onClick={() => toggleEquipment(eq.id)}
+                aria-pressed={on}
+                className={cn(
+                  "px-3 py-1.5 rounded-full text-xs font-medium border transition",
+                  on
+                    ? "bg-primary/15 border-primary text-foreground"
+                    : "bg-transparent border-border text-muted-foreground"
+                )}
+              >
+                {eq.label}
+              </button>
+            );
+          })}
+        </div>
+
         <ul className="space-y-2">
-          {grouped[activeCat].map((ex) => {
+          {grouped[activeCat]
+            .filter((ex) => equipment[getEquipmentType(ex.equipment)])
+            .map((ex) => {
+            const isOn = selected.has(ex.id);
+            return (
+              <li key={ex.id}>
+                <button
+                  onClick={() => toggle(ex.id)}
+                  className={cn(
+                    "w-full text-left glass-card p-3 flex items-center gap-3 transition",
+                    isOn && "ring-2 ring-primary"
+                  )}
             const isOn = selected.has(ex.id);
             return (
               <li key={ex.id}>
