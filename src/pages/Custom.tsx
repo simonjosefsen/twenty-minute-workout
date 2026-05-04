@@ -8,7 +8,9 @@ import {
   saveCustomWorkout,
   loadCustomWorkout,
   addSavedCustomWorkout,
+  getEquipmentType,
   type ExerciseCategory,
+  type EquipmentType,
 } from "@/data/routines";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
