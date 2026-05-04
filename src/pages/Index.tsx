@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles } from "lucide-react";
+import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles, Pencil } from "lucide-react";
 import { routines, loadCustomWorkout, loadSavedCustomWorkouts, deleteSavedCustomWorkout } from "@/data/routines";
 import { useHistory, computeWeeklyStreak, deleteHistoryEntry, loadWeeklyGoal, saveWeeklyGoal } from "@/lib/history";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -33,6 +33,13 @@ const Index = () => {
   const handleSelectGoal = (g: number) => {
     saveWeeklyGoal(g);
     setShowOnboarding(false);
+    refresh();
+  };
+
+  const [showEditGoal, setShowEditGoal] = useState(false);
+  const handleEditGoal = (g: number) => {
+    saveWeeklyGoal(g);
+    setShowEditGoal(false);
     refresh();
   };
 
@@ -80,18 +87,48 @@ const Index = () => {
           </p>
         </div>
         <div className="glass-card p-4">
-          <p className="text-[11px] uppercase tracking-widest text-muted-foreground">This week</p>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[11px] uppercase tracking-widest text-muted-foreground">This week</p>
+            <button
+              onClick={() => setShowEditGoal(true)}
+              className="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition"
+              aria-label="Change weekly goal"
+            >
+              <Pencil className="h-3 w-3" /> Edit
+            </button>
+          </div>
           <p className="text-3xl font-bold mt-1 flex items-baseline gap-1 tabular-nums">
             {thisWeek}<span className="text-muted-foreground">/{goal}</span>
             {thisWeek >= goal + 1 && <span className="text-2xl ml-1" aria-label="On fire">🔥</span>}
           </p>
-          <div className="mt-2 h-1.5 rounded-full bg-secondary/60 overflow-hidden">
+          <div className="mt-2 h-2 rounded-full bg-secondary/60 overflow-hidden">
             <div
-              className="h-full bg-primary transition-all"
+              className="h-full rounded-full bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 transition-all"
               style={{ width: `${progressPct}%` }}
             />
           </div>
         </div>
+
+        <Dialog open={showEditGoal} onOpenChange={setShowEditGoal}>
+          <DialogContent className="max-w-sm">
+            <DialogHeader>
+              <DialogTitle className="text-2xl">Weekly goal</DialogTitle>
+              <DialogDescription>How many workouts per week?</DialogDescription>
+            </DialogHeader>
+            <div className="grid grid-cols-2 gap-3 mt-2">
+              {[2, 3, 4, 5].map((g) => (
+                <Button
+                  key={g}
+                  variant={g === goal ? "default" : "secondary"}
+                  className="h-16 text-lg font-semibold rounded-xl"
+                  onClick={() => handleEditGoal(g)}
+                >
+                  {g} <span className="text-sm opacity-70 ml-1.5">/ week</span>
+                </Button>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
       </section>
 
       {/* Routines */}
