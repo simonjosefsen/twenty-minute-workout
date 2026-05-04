@@ -392,3 +392,13 @@ export const getRoutine = (id: string): Routine | undefined => {
   return routine;
 };
 
+export type EquipmentType = "bodyweight" | "kettlebell" | "dumbbell";
+
+/** Normalize an exercise's equipment string to one of the filterable equipment types. */
+export const getEquipmentType = (equipment?: string): EquipmentType => {
+  const e = (equipment ?? "").toLowerCase();
+  if (e.includes("kettlebell")) return "kettlebell";
+  if (e.includes("dumbbell")) return "dumbbell";
+  return "bodyweight";
+};
+
