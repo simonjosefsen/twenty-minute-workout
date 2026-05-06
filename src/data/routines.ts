@@ -31,6 +31,7 @@ export type Exercise = {
   reps?: number;
   cue: string;
   equipment?: string;
+  image?: string;
 };
 
 export type Block =
