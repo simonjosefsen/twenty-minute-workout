@@ -143,7 +143,7 @@ const Preview = () => {
                   return (
                     <li key={i} className="glass-card p-3 flex items-center gap-3">
                       <div className="h-14 w-20 shrink-0 rounded-xl bg-secondary/50 overflow-hidden flex items-center justify-center">
-                        <ExerciseAnimation kind={ex.kind} size={110} />
+                        <ExerciseAnimation kind={ex.kind} size={110} image={ex.image} />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold leading-tight truncate">{ex.name}</p>
