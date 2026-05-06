@@ -52,7 +52,7 @@ const restLong = (s = 60): Block => ({ type: "rest", duration: s, label: "Round 
 
 // ---- Routine 1: Full Body Kettlebell ----
 const fullBodyRound: Block[] = [
-  { type: "exercise", exercise: { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell", image: kbSwingImg } },
   restShort(20),
   { type: "exercise", exercise: { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell" } },
   restShort(20),
