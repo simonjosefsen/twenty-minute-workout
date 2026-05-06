@@ -255,7 +255,7 @@ const Index = () => {
             <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Recent</h3>
           </div>
           <div className="space-y-2">
-            {history.slice(0, 6).map((h, i) => (
+            {history.slice(0, 4).map((h, i) => (
               <div key={`${h.date}-${i}`} className="glass-card px-4 py-3 flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <p className="text-sm font-medium truncate">{h.routineName}</p>
