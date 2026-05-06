@@ -1,3 +1,5 @@
+import kbSwingImg from "@/assets/exercises/kb-swing.png";
+
 export type ExerciseKind =
   | "squat"
   | "swing"
