@@ -1,12 +1,24 @@
 import type { ExerciseKind } from "@/data/routines";
 
-type Props = { kind: ExerciseKind; size?: number };
+type Props = { kind: ExerciseKind; size?: number; image?: string };
 
 /**
  * Animated SVG figure for each exercise. Pure CSS keyframe animations
  * defined in index.css. Uses currentColor for theming.
  */
-export const ExerciseAnimation = ({ kind, size = 220 }: Props) => {
+export const ExerciseAnimation = ({ kind, size = 220, image }: Props) => {
+  if (image) {
+    return (
+      <img
+        src={image}
+        alt=""
+        width={size}
+        height={size}
+        className="rounded-2xl object-cover drop-shadow-[0_10px_30px_rgba(198,255,61,0.15)]"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
   const stroke = "hsl(var(--primary))";
   const body = "hsl(var(--foreground))";
   const muted = "hsl(var(--muted-foreground))";

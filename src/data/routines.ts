@@ -1,3 +1,5 @@
+import kbSwingImg from "@/assets/exercises/kb-swing.png";
+
 export type ExerciseKind =
   | "squat"
   | "swing"
@@ -29,6 +31,7 @@ export type Exercise = {
   reps?: number;
   cue: string;
   equipment?: string;
+  image?: string;
 };
 
 export type Block =
@@ -49,7 +52,7 @@ const restLong = (s = 60): Block => ({ type: "rest", duration: s, label: "Round 
 
 // ---- Routine 1: Full Body Kettlebell ----
 const fullBodyRound: Block[] = [
-  { type: "exercise", exercise: { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell", image: kbSwingImg } },
   restShort(20),
   { type: "exercise", exercise: { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell" } },
   restShort(20),
@@ -163,7 +166,7 @@ export type CatalogExercise = Exercise & { category: ExerciseCategory };
 
 export const exerciseCatalog: CatalogExercise[] = [
   // Strength (existing)
-  { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell", category: "strength" },
+  { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell", category: "strength", image: kbSwingImg },
   { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell", category: "strength" },
   { id: "pushup", name: "Push-ups", kind: "pushup", reps: 10, cue: "Lower your body with control, then push back up. Keep your core tight and your body in a straight line.", equipment: "Mat", category: "strength" },
   { id: "kb-row", name: "KB Bent-over Row", kind: "row", reps: 10, cue: "Hinge forward with a flat back and pull the kettlebell to your hip. Squeeze your shoulder blade at the top.", equipment: "Kettlebell", category: "strength" },

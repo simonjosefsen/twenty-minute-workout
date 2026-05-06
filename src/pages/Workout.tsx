@@ -196,7 +196,7 @@ const Workout = () => {
           <>
             <div className={cn("w-full max-w-md mt-2 rounded-3xl bg-gradient-to-b to-transparent p-6 glass-card", accentBg)}>
               <div className="flex items-center justify-center">
-                <ExerciseAnimation kind={block.exercise.kind} size={260} />
+                <ExerciseAnimation kind={block.exercise.kind} size={260} image={block.exercise.image} />
               </div>
             </div>
 
