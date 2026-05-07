@@ -98,15 +98,15 @@ const coreRound: Block[] = [
 
 // ---- Routine 3: Mobility & Strength ----
 const mobilityRound: Block[] = [
-  { type: "exercise", exercise: { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—" } },
+  { type: "exercise", exercise: { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—", image: marchImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "lunge", name: "Reverse Lunges", kind: "lunge", reps: 12, cue: "Step one leg back and lower your rear knee toward the floor. Keep your front knee over your ankle and chest upright.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "lunge", name: "Reverse Lunges", kind: "lunge", reps: 12, cue: "Step one leg back and lower your rear knee toward the floor. Keep your front knee over your ankle and chest upright.", equipment: "Mat", image: lungeImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "deadlift", name: "KB Deadlift", kind: "deadlift", reps: 12, cue: "Hinge at the hips and lower the kettlebell along your shins. Keep your back flat and drive through your heels to stand.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "deadlift", name: "KB Deadlift", kind: "deadlift", reps: 12, cue: "Hinge at the hips and lower the kettlebell along your shins. Keep your back flat and drive through your heels to stand.", equipment: "Kettlebell", image: kbDeadliftImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "On all fours, slowly arch and round your back with your breath. Move smoothly and stay relaxed through the neck.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "On all fours, slowly arch and round your back with your breath. Move smoothly and stay relaxed through the neck.", equipment: "Mat", image: catCowImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "plank-mob", name: "Plank Hold", kind: "plank", duration: 30, cue: "Hold a solid line from head to heels. Keep your core tight and breathe steadily.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "plank-mob", name: "Plank Hold", kind: "plank", duration: 30, cue: "Hold a solid line from head to heels. Keep your core tight and breathe steadily.", equipment: "Mat", image: plankImg } },
 ];
 
 const buildRounds = (round: Block[], n = 3): Block[] => {
