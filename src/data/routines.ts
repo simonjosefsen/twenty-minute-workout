@@ -74,13 +74,13 @@ const restLong = (s = 60): Block => ({ type: "rest", duration: s, label: "Round 
 const fullBodyRound: Block[] = [
   { type: "exercise", exercise: { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell", image: kbSwingImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell", image: gobletSquatImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "pushup", name: "Push-ups", kind: "pushup", reps: 10, cue: "Lower your body with control, then push back up. Keep your core tight and your body in a straight line.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "pushup", name: "Push-ups", kind: "pushup", reps: 10, cue: "Lower your body with control, then push back up. Keep your core tight and your body in a straight line.", equipment: "Mat", image: pushupImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "kb-row", name: "KB Bent-over Row", kind: "row", reps: 10, cue: "Hinge forward with a flat back and pull the kettlebell to your hip. Squeeze your shoulder blade at the top.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "kb-row", name: "KB Bent-over Row", kind: "row", reps: 10, cue: "Hinge forward with a flat back and pull the kettlebell to your hip. Squeeze your shoulder blade at the top.", equipment: "Kettlebell", image: kbRowImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "plank", name: "Plank", kind: "plank", duration: 40, cue: "Hold your body in a straight line from head to heels. Keep your core tight and avoid letting your hips drop.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "plank", name: "Plank", kind: "plank", duration: 40, cue: "Hold your body in a straight line from head to heels. Keep your core tight and avoid letting your hips drop.", equipment: "Mat", image: plankImg } },
 ];
 
 // ---- Routine 2: Core & Conditioning ----
