@@ -77,11 +77,11 @@ const fullBodyRound: Block[] = [
 const coreRound: Block[] = [
   { type: "exercise", exercise: { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope" } },
   restShort(15),
-  { type: "exercise", exercise: { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", image: russianTwistImg } },
   restShort(15),
-  { type: "exercise", exercise: { id: "crunch", name: "Crunches", kind: "crunch", reps: 15, cue: "Lift your shoulder blades off the floor and exhale at the top. Keep the movement slow and controlled.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "crunch", name: "Crunches", kind: "crunch", reps: 15, cue: "Lift your shoulder blades off the floor and exhale at the top. Keep the movement slow and controlled.", equipment: "Mat", image: crunchImg } },
   restShort(15),
-  { type: "exercise", exercise: { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat", image: shoulderTapImg } },
   restShort(15),
   { type: "exercise", exercise: { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell" } },
 ];
