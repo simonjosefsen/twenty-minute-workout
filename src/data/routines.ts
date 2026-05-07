@@ -85,7 +85,7 @@ const fullBodyRound: Block[] = [
 
 // ---- Routine 2: Core & Conditioning ----
 const coreRound: Block[] = [
-  { type: "exercise", exercise: { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope" } },
+  { type: "exercise", exercise: { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope", image: ropeImg } },
   restShort(15),
   { type: "exercise", exercise: { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", image: russianTwistImg } },
   restShort(15),
