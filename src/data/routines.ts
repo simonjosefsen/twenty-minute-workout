@@ -1,4 +1,14 @@
 import kbSwingImg from "@/assets/exercises/kb-swing.png";
+import crunchImg from "@/assets/exercises/crunch.png";
+import shoulderTapImg from "@/assets/exercises/shoulder-tap.png";
+import russianTwistImg from "@/assets/exercises/russian-twist.png";
+import backBendsImg from "@/assets/exercises/back-bends.png";
+import benchDipImg from "@/assets/exercises/bench-dip.png";
+import ohCrunchImg from "@/assets/exercises/oh-crunch.png";
+import rotMtClimberImg from "@/assets/exercises/rot-mt-climber.png";
+import legRaiseImg from "@/assets/exercises/leg-raise.png";
+import abPendulumImg from "@/assets/exercises/ab-pendulum.png";
+import dbSquatImg from "@/assets/exercises/db-squat.png";
 
 export type ExerciseKind =
   | "squat"
@@ -67,11 +77,11 @@ const fullBodyRound: Block[] = [
 const coreRound: Block[] = [
   { type: "exercise", exercise: { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope" } },
   restShort(15),
-  { type: "exercise", exercise: { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", image: russianTwistImg } },
   restShort(15),
-  { type: "exercise", exercise: { id: "crunch", name: "Crunches", kind: "crunch", reps: 15, cue: "Lift your shoulder blades off the floor and exhale at the top. Keep the movement slow and controlled.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "crunch", name: "Crunches", kind: "crunch", reps: 15, cue: "Lift your shoulder blades off the floor and exhale at the top. Keep the movement slow and controlled.", equipment: "Mat", image: crunchImg } },
   restShort(15),
-  { type: "exercise", exercise: { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat", image: shoulderTapImg } },
   restShort(15),
   { type: "exercise", exercise: { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell" } },
 ];
@@ -182,22 +192,22 @@ export const exerciseCatalog: CatalogExercise[] = [
   { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—", category: "cardio" },
   { id: "jumping-jack", name: "Jumping Jacks", kind: "jumpingJack", duration: 40, cue: "Jump your feet out while raising your arms overhead, then return. Stay light on your feet and keep a steady pace.", equipment: "—", category: "cardio" },
   // Core (existing → strength bucket)
-  { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", category: "strength" },
-  { id: "crunch", name: "Crunches", kind: "crunch", reps: 15, cue: "Lift your shoulder blades off the floor and exhale at the top. Keep the movement slow and controlled.", equipment: "Mat", category: "strength" },
-  { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat", category: "strength" },
+  { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", category: "strength", image: russianTwistImg },
+  { id: "crunch", name: "Crunches", kind: "crunch", reps: 15, cue: "Lift your shoulder blades off the floor and exhale at the top. Keep the movement slow and controlled.", equipment: "Mat", category: "strength", image: crunchImg },
+  { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat", category: "strength", image: shoulderTapImg },
 
   // ---- New exercises (placeholder visuals) ----
-  { id: "back-bends", name: "Back Bends", kind: "generic", duration: 30, cue: "Place your hands on your lower back and gently arch backward. Move slowly and only go as far as feels comfortable.", equipment: "—", category: "static" },
+  { id: "back-bends", name: "Back Bends", kind: "generic", duration: 30, cue: "Place your hands on your lower back and gently arch backward. Move slowly and only go as far as feels comfortable.", equipment: "—", category: "static", image: backBendsImg },
   { id: "sit-ups", name: "Sit Ups", kind: "generic", reps: 15, cue: "Sit all the way up, then lower back down with control. Exhale on the way up and keep the movement smooth.", equipment: "Mat", category: "strength" },
   { id: "bw-lunge", name: "Bodyweight Lunge", kind: "generic", reps: 12, cue: "Step forward and lower your back knee toward the floor. Keep your front knee over your ankle and alternate legs.", equipment: "—", category: "strength" },
-  { id: "bench-dip", name: "Dip, on bench", kind: "generic", reps: 10, cue: "Place your hands on a bench and bend your elbows to lower down. Keep your elbows pointing back and press up to start.", equipment: "Bench", category: "strength" },
-  { id: "oh-crunch", name: "Hands Overhead Crunch", kind: "generic", reps: 15, cue: "Extend your arms overhead and crunch up, keeping arms straight. Exhale at the top and lower with control.", equipment: "Mat", category: "strength" },
-  { id: "rot-mt-climber", name: "Rotating Mountain Climber", kind: "generic", duration: 30, cue: "From a plank, drive each knee toward the opposite elbow. Keep your hips low and core engaged.", equipment: "Mat", category: "cardio" },
-  { id: "leg-raise", name: "Floor Leg Raise", kind: "generic", reps: 12, cue: "Lie on your back and slowly lower your legs toward the floor, then lift back up. Keep your lower back pressed down the whole time.", equipment: "Mat", category: "strength" },
-  { id: "ab-pendulum", name: "Bent Knees Ab Pendulum", kind: "generic", reps: 16, cue: "Lie on your back with knees bent and lifted. Swing your knees side to side under control while keeping your shoulders down.", equipment: "Mat", category: "strength" },
+  { id: "bench-dip", name: "Dip, on bench", kind: "generic", reps: 10, cue: "Place your hands on a bench and bend your elbows to lower down. Keep your elbows pointing back and press up to start.", equipment: "Bench", category: "strength", image: benchDipImg },
+  { id: "oh-crunch", name: "Hands Overhead Crunch", kind: "generic", reps: 15, cue: "Extend your arms overhead and crunch up, keeping arms straight. Exhale at the top and lower with control.", equipment: "Mat", category: "strength", image: ohCrunchImg },
+  { id: "rot-mt-climber", name: "Rotating Mountain Climber", kind: "generic", duration: 30, cue: "From a plank, drive each knee toward the opposite elbow. Keep your hips low and core engaged.", equipment: "Mat", category: "cardio", image: rotMtClimberImg },
+  { id: "leg-raise", name: "Floor Leg Raise", kind: "generic", reps: 12, cue: "Lie on your back and slowly lower your legs toward the floor, then lift back up. Keep your lower back pressed down the whole time.", equipment: "Mat", category: "strength", image: legRaiseImg },
+  { id: "ab-pendulum", name: "Bent Knees Ab Pendulum", kind: "generic", reps: 16, cue: "Lie on your back with knees bent and lifted. Swing your knees side to side under control while keeping your shoulders down.", equipment: "Mat", category: "strength", image: abPendulumImg },
 
   // ---- Dumbbell ----
-  { id: "db-squat", name: "Dumbbell Squat", kind: "squat", reps: 12, cue: "Stand with feet shoulder-width apart holding dumbbells. Lower your hips into a squat, then stand back up. Keep your chest upright.", equipment: "Dumbbell", category: "strength" },
+  { id: "db-squat", name: "Dumbbell Squat", kind: "squat", reps: 12, cue: "Stand with feet shoulder-width apart holding dumbbells. Lower your hips into a squat, then stand back up. Keep your chest upright.", equipment: "Dumbbell", category: "strength", image: dbSquatImg },
   { id: "db-lunges", name: "Dumbbell Lunges", kind: "lunge", reps: 12, cue: "Step forward into a lunge while holding dumbbells. Lower your back knee toward the floor, then push back up. Alternate legs.", equipment: "Dumbbell", category: "strength" },
   { id: "db-shoulder-press", name: "Dumbbell Shoulder Press", kind: "generic", reps: 10, cue: "Hold dumbbells at shoulder height. Press them overhead until arms are extended, then lower with control.", equipment: "Dumbbell", category: "strength" },
   { id: "db-bent-row", name: "Dumbbell Bent Over Row", kind: "row", reps: 10, cue: "Hinge at the hips with a flat back. Pull the dumbbells toward your torso, then lower slowly.", equipment: "Dumbbell", category: "strength" },
