@@ -1,4 +1,14 @@
 import kbSwingImg from "@/assets/exercises/kb-swing.png";
+import crunchImg from "@/assets/exercises/crunch.png";
+import shoulderTapImg from "@/assets/exercises/shoulder-tap.png";
+import russianTwistImg from "@/assets/exercises/russian-twist.png";
+import backBendsImg from "@/assets/exercises/back-bends.png";
+import benchDipImg from "@/assets/exercises/bench-dip.png";
+import ohCrunchImg from "@/assets/exercises/oh-crunch.png";
+import rotMtClimberImg from "@/assets/exercises/rot-mt-climber.png";
+import legRaiseImg from "@/assets/exercises/leg-raise.png";
+import abPendulumImg from "@/assets/exercises/ab-pendulum.png";
+import dbSquatImg from "@/assets/exercises/db-squat.png";
 
 export type ExerciseKind =
   | "squat"
