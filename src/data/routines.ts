@@ -9,6 +9,16 @@ import rotMtClimberImg from "@/assets/exercises/rot-mt-climber.png";
 import legRaiseImg from "@/assets/exercises/leg-raise.png";
 import abPendulumImg from "@/assets/exercises/ab-pendulum.png";
 import dbSquatImg from "@/assets/exercises/db-squat.png";
+import gobletSquatImg from "@/assets/exercises/goblet-squat.png";
+import pushupImg from "@/assets/exercises/pushup.png";
+import kbRowImg from "@/assets/exercises/kb-row.png";
+import plankImg from "@/assets/exercises/plank.png";
+import kbDeadliftImg from "@/assets/exercises/kb-deadlift.png";
+import lungeImg from "@/assets/exercises/lunge.png";
+import kbHaloImg from "@/assets/exercises/kb-halo.png";
+import catCowImg from "@/assets/exercises/cat-cow.png";
+import marchImg from "@/assets/exercises/march.png";
+import ropeImg from "@/assets/exercises/rope.png";
 
 export type ExerciseKind =
   | "squat"
