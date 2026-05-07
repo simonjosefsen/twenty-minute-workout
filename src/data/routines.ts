@@ -93,7 +93,7 @@ const coreRound: Block[] = [
   restShort(15),
   { type: "exercise", exercise: { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat", image: shoulderTapImg } },
   restShort(15),
-  { type: "exercise", exercise: { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell", image: kbHaloImg } },
 ];
 
 // ---- Routine 3: Mobility & Strength ----
