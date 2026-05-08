@@ -27,6 +27,14 @@ import dbShoulderPressImg from "@/assets/exercises/db-shoulder-press.png";
 import dbBentRowImg from "@/assets/exercises/db-bent-row.png";
 import dbDeadliftImg from "@/assets/exercises/db-deadlift.png";
 import dbRussianTwistImg from "@/assets/exercises/db-russian-twist.png";
+import ppBirdDogImg from "@/assets/exercises/pp-bird-dog.png";
+import ppCatCowImg from "@/assets/exercises/pp-cat-cow.png";
+import ppDeadBugImg from "@/assets/exercises/pp-dead-bug.png";
+import ppDeepBreathingImg from "@/assets/exercises/pp-deep-breathing.png";
+import ppGluteBridgeImg from "@/assets/exercises/pp-glute-bridge.png";
+import ppHeelSlidesImg from "@/assets/exercises/pp-heel-slides.png";
+import ppPelvicTiltsImg from "@/assets/exercises/pp-pelvic-tilts.png";
+import ppSideLegLiftImg from "@/assets/exercises/pp-side-leg-lift.png";
 
 export type ExerciseKind =
   | "squat"
