@@ -9,6 +9,16 @@ import rotMtClimberImg from "@/assets/exercises/rot-mt-climber.png";
 import legRaiseImg from "@/assets/exercises/leg-raise.png";
 import abPendulumImg from "@/assets/exercises/ab-pendulum.png";
 import dbSquatImg from "@/assets/exercises/db-squat.png";
+import plankImg from "@/assets/exercises/plank.png";
+import pushupImg from "@/assets/exercises/pushup.png";
+import ropeImg from "@/assets/exercises/rope.png";
+import catCowImg from "@/assets/exercises/cat-cow.png";
+import deadliftImg from "@/assets/exercises/deadlift.png";
+import gobletSquatImg from "@/assets/exercises/goblet-squat.png";
+import haloImg from "@/assets/exercises/halo.png";
+import kbRowImg from "@/assets/exercises/kb-row.png";
+import lungeImg from "@/assets/exercises/lunge.png";
+import marchImg from "@/assets/exercises/march.png";
 
 export type ExerciseKind =
   | "squat"
@@ -64,18 +74,18 @@ const restLong = (s = 60): Block => ({ type: "rest", duration: s, label: "Round 
 const fullBodyRound: Block[] = [
   { type: "exercise", exercise: { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell", image: kbSwingImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell", image: gobletSquatImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "pushup", name: "Push-ups", kind: "pushup", reps: 10, cue: "Lower your body with control, then push back up. Keep your core tight and your body in a straight line.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "pushup", name: "Push-ups", kind: "pushup", reps: 10, cue: "Lower your body with control, then push back up. Keep your core tight and your body in a straight line.", equipment: "Mat", image: pushupImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "kb-row", name: "KB Bent-over Row", kind: "row", reps: 10, cue: "Hinge forward with a flat back and pull the kettlebell to your hip. Squeeze your shoulder blade at the top.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "kb-row", name: "KB Bent-over Row", kind: "row", reps: 10, cue: "Hinge forward with a flat back and pull the kettlebell to your hip. Squeeze your shoulder blade at the top.", equipment: "Kettlebell", image: kbRowImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "plank", name: "Plank", kind: "plank", duration: 40, cue: "Hold your body in a straight line from head to heels. Keep your core tight and avoid letting your hips drop.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "plank", name: "Plank", kind: "plank", duration: 40, cue: "Hold your body in a straight line from head to heels. Keep your core tight and avoid letting your hips drop.", equipment: "Mat", image: plankImg } },
 ];
 
 // ---- Routine 2: Core & Conditioning ----
 const coreRound: Block[] = [
-  { type: "exercise", exercise: { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope" } },
+  { type: "exercise", exercise: { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope", image: ropeImg } },
   restShort(15),
   { type: "exercise", exercise: { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", image: russianTwistImg } },
   restShort(15),
@@ -83,20 +93,20 @@ const coreRound: Block[] = [
   restShort(15),
   { type: "exercise", exercise: { id: "shoulder-tap", name: "Plank Shoulder Taps", kind: "shoulderTap", duration: 30, cue: "From a plank, tap each hand to the opposite shoulder. Keep your hips steady and avoid rocking side to side.", equipment: "Mat", image: shoulderTapImg } },
   restShort(15),
-  { type: "exercise", exercise: { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell", image: haloImg } },
 ];
 
 // ---- Routine 3: Mobility & Strength ----
 const mobilityRound: Block[] = [
-  { type: "exercise", exercise: { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—" } },
+  { type: "exercise", exercise: { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—", image: marchImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "lunge", name: "Reverse Lunges", kind: "lunge", reps: 12, cue: "Step one leg back and lower your rear knee toward the floor. Keep your front knee over your ankle and chest upright.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "lunge", name: "Reverse Lunges", kind: "lunge", reps: 12, cue: "Step one leg back and lower your rear knee toward the floor. Keep your front knee over your ankle and chest upright.", equipment: "Mat", image: lungeImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "deadlift", name: "KB Deadlift", kind: "deadlift", reps: 12, cue: "Hinge at the hips and lower the kettlebell along your shins. Keep your back flat and drive through your heels to stand.", equipment: "Kettlebell" } },
+  { type: "exercise", exercise: { id: "deadlift", name: "KB Deadlift", kind: "deadlift", reps: 12, cue: "Hinge at the hips and lower the kettlebell along your shins. Keep your back flat and drive through your heels to stand.", equipment: "Kettlebell", image: deadliftImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "On all fours, slowly arch and round your back with your breath. Move smoothly and stay relaxed through the neck.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "On all fours, slowly arch and round your back with your breath. Move smoothly and stay relaxed through the neck.", equipment: "Mat", image: catCowImg } },
   restShort(20),
-  { type: "exercise", exercise: { id: "plank-mob", name: "Plank Hold", kind: "plank", duration: 30, cue: "Hold a solid line from head to heels. Keep your core tight and breathe steadily.", equipment: "Mat" } },
+  { type: "exercise", exercise: { id: "plank-mob", name: "Plank Hold", kind: "plank", duration: 30, cue: "Hold a solid line from head to heels. Keep your core tight and breathe steadily.", equipment: "Mat", image: plankImg } },
 ];
 
 const buildRounds = (round: Block[], n = 3): Block[] => {
@@ -177,19 +187,19 @@ export type CatalogExercise = Exercise & { category: ExerciseCategory };
 export const exerciseCatalog: CatalogExercise[] = [
   // Strength (existing)
   { id: "kb-swing", name: "KB Swing", kind: "swing", duration: 40, cue: "Hinge at the hips and swing the kettlebell to chest height. Snap your glutes at the top and keep your back flat.", equipment: "Kettlebell", category: "strength", image: kbSwingImg },
-  { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell", category: "strength" },
-  { id: "pushup", name: "Push-ups", kind: "pushup", reps: 10, cue: "Lower your body with control, then push back up. Keep your core tight and your body in a straight line.", equipment: "Mat", category: "strength" },
-  { id: "kb-row", name: "KB Bent-over Row", kind: "row", reps: 10, cue: "Hinge forward with a flat back and pull the kettlebell to your hip. Squeeze your shoulder blade at the top.", equipment: "Kettlebell", category: "strength" },
-  { id: "kb-deadlift", name: "KB Deadlift", kind: "deadlift", reps: 12, cue: "Hinge at the hips and lower the kettlebell along your shins. Keep your back flat and drive through your heels to stand.", equipment: "Kettlebell", category: "strength" },
-  { id: "lunge", name: "Reverse Lunges", kind: "lunge", reps: 12, cue: "Step one leg back and lower your rear knee toward the floor. Keep your front knee over your ankle and chest upright.", equipment: "Mat", category: "strength" },
-  { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell", category: "strength" },
+  { id: "goblet-squat", name: "KB Goblet Squat", kind: "squat", reps: 12, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes.", equipment: "Kettlebell", category: "strength", image: gobletSquatImg },
+  { id: "pushup", name: "Push-ups", kind: "pushup", reps: 10, cue: "Lower your body with control, then push back up. Keep your core tight and your body in a straight line.", equipment: "Mat", category: "strength", image: pushupImg },
+  { id: "kb-row", name: "KB Bent-over Row", kind: "row", reps: 10, cue: "Hinge forward with a flat back and pull the kettlebell to your hip. Squeeze your shoulder blade at the top.", equipment: "Kettlebell", category: "strength", image: kbRowImg },
+  { id: "kb-deadlift", name: "KB Deadlift", kind: "deadlift", reps: 12, cue: "Hinge at the hips and lower the kettlebell along your shins. Keep your back flat and drive through your heels to stand.", equipment: "Kettlebell", category: "strength", image: deadliftImg },
+  { id: "lunge", name: "Reverse Lunges", kind: "lunge", reps: 12, cue: "Step one leg back and lower your rear knee toward the floor. Keep your front knee over your ankle and chest upright.", equipment: "Mat", category: "strength", image: lungeImg },
+  { id: "halo", name: "KB Halo", kind: "halo", reps: 10, cue: "Circle the kettlebell around your head in both directions. Keep your core braced and shoulders relaxed.", equipment: "Kettlebell", category: "strength", image: haloImg },
   // Static (holds + mobility)
-  { id: "plank", name: "Plank", kind: "plank", duration: 40, cue: "Hold your body in a straight line from head to heels. Keep your core tight and avoid letting your hips drop.", equipment: "Mat", category: "static" },
-  { id: "cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "On all fours, slowly arch and round your back with your breath. Move smoothly and stay relaxed through the neck.", equipment: "Mat", category: "static" },
+  { id: "plank", name: "Plank", kind: "plank", duration: 40, cue: "Hold your body in a straight line from head to heels. Keep your core tight and avoid letting your hips drop.", equipment: "Mat", category: "static", image: plankImg },
+  { id: "cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "On all fours, slowly arch and round your back with your breath. Move smoothly and stay relaxed through the neck.", equipment: "Mat", category: "static", image: catCowImg },
   { id: "stretch", name: "Standing Stretch", kind: "stretch", duration: 30, cue: "Stand tall and gently open up the body. Move slowly and breathe deeply through each stretch.", equipment: "—", category: "static" },
   // Cardio
-  { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope", category: "cardio" },
-  { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—", category: "cardio" },
+  { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope", category: "cardio", image: ropeImg },
+  { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—", category: "cardio", image: marchImg },
   { id: "jumping-jack", name: "Jumping Jacks", kind: "jumpingJack", duration: 40, cue: "Jump your feet out while raising your arms overhead, then return. Stay light on your feet and keep a steady pace.", equipment: "—", category: "cardio" },
   // Core (existing → strength bucket)
   { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", category: "strength", image: russianTwistImg },
