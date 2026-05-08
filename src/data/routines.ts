@@ -19,6 +19,14 @@ import haloImg from "@/assets/exercises/halo.png";
 import kbRowImg from "@/assets/exercises/kb-row.png";
 import lungeImg from "@/assets/exercises/lunge.png";
 import marchImg from "@/assets/exercises/march.png";
+import sitUpsImg from "@/assets/exercises/sit-ups.png";
+import bwLungeImg from "@/assets/exercises/bw-lunge.png";
+import jumpingJackImg from "@/assets/exercises/jumping-jack.png";
+import dbLungesImg from "@/assets/exercises/db-lunges.png";
+import dbShoulderPressImg from "@/assets/exercises/db-shoulder-press.png";
+import dbBentRowImg from "@/assets/exercises/db-bent-row.png";
+import dbDeadliftImg from "@/assets/exercises/db-deadlift.png";
+import dbRussianTwistImg from "@/assets/exercises/db-russian-twist.png";
 
 export type ExerciseKind =
   | "squat"
@@ -200,7 +208,7 @@ export const exerciseCatalog: CatalogExercise[] = [
   // Cardio
   { id: "rope", name: "Rope Skips", kind: "ropeJump", duration: 45, cue: "Bounce lightly on the balls of your feet and keep a steady rhythm. Stay tall and relaxed through the shoulders.", equipment: "Rope", category: "cardio", image: ropeImg },
   { id: "march", name: "March in Place", kind: "march", duration: 40, cue: "Lift your knees to hip height and swing your arms naturally. Stay tall and keep a steady rhythm.", equipment: "—", category: "cardio", image: marchImg },
-  { id: "jumping-jack", name: "Jumping Jacks", kind: "jumpingJack", duration: 40, cue: "Jump your feet out while raising your arms overhead, then return. Stay light on your feet and keep a steady pace.", equipment: "—", category: "cardio" },
+  { id: "jumping-jack", name: "Jumping Jacks", kind: "jumpingJack", duration: 40, cue: "Jump your feet out while raising your arms overhead, then return. Stay light on your feet and keep a steady pace.", equipment: "—", category: "cardio", image: jumpingJackImg },
   // Core (existing → strength bucket)
   { id: "russian-twist", name: "KB Russian Twist", kind: "twist", reps: 20, cue: "Sit and lean back slightly, then rotate the kettlebell side to side. Keep your core engaged the whole time.", equipment: "Kettlebell", category: "strength", image: russianTwistImg },
   { id: "crunch", name: "Crunches", kind: "crunch", reps: 15, cue: "Lift your shoulder blades off the floor and exhale at the top. Keep the movement slow and controlled.", equipment: "Mat", category: "strength", image: crunchImg },
@@ -208,8 +216,8 @@ export const exerciseCatalog: CatalogExercise[] = [
 
   // ---- New exercises (placeholder visuals) ----
   { id: "back-bends", name: "Back Bends", kind: "generic", duration: 30, cue: "Place your hands on your lower back and gently arch backward. Move slowly and only go as far as feels comfortable.", equipment: "—", category: "static", image: backBendsImg },
-  { id: "sit-ups", name: "Sit Ups", kind: "generic", reps: 15, cue: "Sit all the way up, then lower back down with control. Exhale on the way up and keep the movement smooth.", equipment: "Mat", category: "strength" },
-  { id: "bw-lunge", name: "Bodyweight Lunge", kind: "generic", reps: 12, cue: "Step forward and lower your back knee toward the floor. Keep your front knee over your ankle and alternate legs.", equipment: "—", category: "strength" },
+  { id: "sit-ups", name: "Sit Ups", kind: "generic", reps: 15, cue: "Sit all the way up, then lower back down with control. Exhale on the way up and keep the movement smooth.", equipment: "Mat", category: "strength", image: sitUpsImg },
+  { id: "bw-lunge", name: "Bodyweight Lunge", kind: "generic", reps: 12, cue: "Step forward and lower your back knee toward the floor. Keep your front knee over your ankle and alternate legs.", equipment: "—", category: "strength", image: bwLungeImg },
   { id: "bench-dip", name: "Dip, on bench", kind: "generic", reps: 10, cue: "Place your hands on a bench and bend your elbows to lower down. Keep your elbows pointing back and press up to start.", equipment: "Bench", category: "strength", image: benchDipImg },
   { id: "oh-crunch", name: "Hands Overhead Crunch", kind: "generic", reps: 15, cue: "Extend your arms overhead and crunch up, keeping arms straight. Exhale at the top and lower with control.", equipment: "Mat", category: "strength", image: ohCrunchImg },
   { id: "rot-mt-climber", name: "Rotating Mountain Climber", kind: "generic", duration: 30, cue: "From a plank, drive each knee toward the opposite elbow. Keep your hips low and core engaged.", equipment: "Mat", category: "cardio", image: rotMtClimberImg },
@@ -218,11 +226,11 @@ export const exerciseCatalog: CatalogExercise[] = [
 
   // ---- Dumbbell ----
   { id: "db-squat", name: "Dumbbell Squat", kind: "squat", reps: 12, cue: "Stand with feet shoulder-width apart holding dumbbells. Lower your hips into a squat, then stand back up. Keep your chest upright.", equipment: "Dumbbell", category: "strength", image: dbSquatImg },
-  { id: "db-lunges", name: "Dumbbell Lunges", kind: "lunge", reps: 12, cue: "Step forward into a lunge while holding dumbbells. Lower your back knee toward the floor, then push back up. Alternate legs.", equipment: "Dumbbell", category: "strength" },
-  { id: "db-shoulder-press", name: "Dumbbell Shoulder Press", kind: "generic", reps: 10, cue: "Hold dumbbells at shoulder height. Press them overhead until arms are extended, then lower with control.", equipment: "Dumbbell", category: "strength" },
-  { id: "db-bent-row", name: "Dumbbell Bent Over Row", kind: "row", reps: 10, cue: "Hinge at the hips with a flat back. Pull the dumbbells toward your torso, then lower slowly.", equipment: "Dumbbell", category: "strength" },
-  { id: "db-deadlift", name: "Dumbbell Deadlift", kind: "deadlift", reps: 12, cue: "Hold dumbbells in front of your legs. Hinge at the hips and lower them down your thighs, then stand back up.", equipment: "Dumbbell", category: "strength" },
-  { id: "db-russian-twist", name: "Dumbbell Russian Twist", kind: "twist", reps: 20, cue: "Sit with feet slightly off the ground. Hold a dumbbell and rotate side to side, keeping your core engaged.", equipment: "Dumbbell", category: "strength" },
+  { id: "db-lunges", name: "Dumbbell Lunges", kind: "lunge", reps: 12, cue: "Step forward into a lunge while holding dumbbells. Lower your back knee toward the floor, then push back up. Alternate legs.", equipment: "Dumbbell", category: "strength", image: dbLungesImg },
+  { id: "db-shoulder-press", name: "Dumbbell Shoulder Press", kind: "generic", reps: 10, cue: "Hold dumbbells at shoulder height. Press them overhead until arms are extended, then lower with control.", equipment: "Dumbbell", category: "strength", image: dbShoulderPressImg },
+  { id: "db-bent-row", name: "Dumbbell Bent Over Row", kind: "row", reps: 10, cue: "Hinge at the hips with a flat back. Pull the dumbbells toward your torso, then lower slowly.", equipment: "Dumbbell", category: "strength", image: dbBentRowImg },
+  { id: "db-deadlift", name: "Dumbbell Deadlift", kind: "deadlift", reps: 12, cue: "Hold dumbbells in front of your legs. Hinge at the hips and lower them down your thighs, then stand back up.", equipment: "Dumbbell", category: "strength", image: dbDeadliftImg },
+  { id: "db-russian-twist", name: "Dumbbell Russian Twist", kind: "twist", reps: 20, cue: "Sit with feet slightly off the ground. Hold a dumbbell and rotate side to side, keeping your core engaged.", equipment: "Dumbbell", category: "strength", image: dbRussianTwistImg },
 
   // ---- Postpartum (gentle, no equipment, no jumping) ----
   { id: "pp-deep-breathing", name: "Deep Breathing", kind: "generic", duration: 45, cue: "Lie on your back with bent knees. Breathe slowly into your belly and gently activate your core on the exhale.", equipment: "—", category: "postpartum" },
