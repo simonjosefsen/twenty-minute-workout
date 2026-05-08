@@ -27,6 +27,14 @@ import dbShoulderPressImg from "@/assets/exercises/db-shoulder-press.png";
 import dbBentRowImg from "@/assets/exercises/db-bent-row.png";
 import dbDeadliftImg from "@/assets/exercises/db-deadlift.png";
 import dbRussianTwistImg from "@/assets/exercises/db-russian-twist.png";
+import ppBirdDogImg from "@/assets/exercises/pp-bird-dog.png";
+import ppCatCowImg from "@/assets/exercises/pp-cat-cow.png";
+import ppDeadBugImg from "@/assets/exercises/pp-dead-bug.png";
+import ppDeepBreathingImg from "@/assets/exercises/pp-deep-breathing.png";
+import ppGluteBridgeImg from "@/assets/exercises/pp-glute-bridge.png";
+import ppHeelSlidesImg from "@/assets/exercises/pp-heel-slides.png";
+import ppPelvicTiltsImg from "@/assets/exercises/pp-pelvic-tilts.png";
+import ppSideLegLiftImg from "@/assets/exercises/pp-side-leg-lift.png";
 
 export type ExerciseKind =
   | "squat"
@@ -233,14 +241,14 @@ export const exerciseCatalog: CatalogExercise[] = [
   { id: "db-russian-twist", name: "Dumbbell Russian Twist", kind: "twist", reps: 20, cue: "Sit with feet slightly off the ground. Hold a dumbbell and rotate side to side, keeping your core engaged.", equipment: "Dumbbell", category: "strength", image: dbRussianTwistImg },
 
   // ---- Postpartum (gentle, no equipment, no jumping) ----
-  { id: "pp-deep-breathing", name: "Deep Breathing", kind: "generic", duration: 45, cue: "Lie on your back with bent knees. Breathe slowly into your belly and gently activate your core on the exhale.", equipment: "—", category: "postpartum" },
-  { id: "pp-pelvic-tilts", name: "Pelvic Tilts", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Slowly tilt your pelvis to gently flatten your lower back into the floor, then release.", equipment: "—", category: "postpartum" },
-  { id: "pp-glute-bridge", name: "Glute Bridge", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Press through your feet and lift your hips, then lower slowly.", equipment: "—", category: "postpartum" },
-  { id: "pp-heel-slides", name: "Heel Slides", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Slowly slide one heel away from you, then bring it back. Switch sides.", equipment: "—", category: "postpartum" },
-  { id: "pp-bird-dog", name: "Bird Dog", kind: "generic", reps: 10, cue: "Start on hands and knees. Extend opposite arm and leg while keeping your hips stable.", equipment: "—", category: "postpartum" },
-  { id: "pp-dead-bug", name: "Dead Bug", kind: "generic", reps: 10, cue: "Lie on your back with arms and legs raised. Slowly lower opposite arm and leg while keeping your lower back supported.", equipment: "—", category: "postpartum" },
-  { id: "pp-side-leg-lift", name: "Side-Lying Leg Lift", kind: "generic", reps: 12, cue: "Lie on your side and slowly lift the top leg, then lower with control.", equipment: "—", category: "postpartum" },
-  { id: "pp-cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "Start on hands and knees. Slowly round and arch your back with your breath.", equipment: "—", category: "postpartum" },
+  { id: "pp-deep-breathing", name: "Deep Breathing", kind: "generic", duration: 45, cue: "Lie on your back with bent knees. Breathe slowly into your belly and gently activate your core on the exhale.", equipment: "—", category: "postpartum", image: ppDeepBreathingImg },
+  { id: "pp-pelvic-tilts", name: "Pelvic Tilts", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Slowly tilt your pelvis to gently flatten your lower back into the floor, then release.", equipment: "—", category: "postpartum", image: ppPelvicTiltsImg },
+  { id: "pp-glute-bridge", name: "Glute Bridge", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Press through your feet and lift your hips, then lower slowly.", equipment: "—", category: "postpartum", image: ppGluteBridgeImg },
+  { id: "pp-heel-slides", name: "Heel Slides", kind: "generic", reps: 10, cue: "Lie on your back with bent knees. Slowly slide one heel away from you, then bring it back. Switch sides.", equipment: "—", category: "postpartum", image: ppHeelSlidesImg },
+  { id: "pp-bird-dog", name: "Bird Dog", kind: "generic", reps: 10, cue: "Start on hands and knees. Extend opposite arm and leg while keeping your hips stable.", equipment: "—", category: "postpartum", image: ppBirdDogImg },
+  { id: "pp-dead-bug", name: "Dead Bug", kind: "generic", reps: 10, cue: "Lie on your back with arms and legs raised. Slowly lower opposite arm and leg while keeping your lower back supported.", equipment: "—", category: "postpartum", image: ppDeadBugImg },
+  { id: "pp-side-leg-lift", name: "Side-Lying Leg Lift", kind: "generic", reps: 12, cue: "Lie on your side and slowly lift the top leg, then lower with control.", equipment: "—", category: "postpartum", image: ppSideLegLiftImg },
+  { id: "pp-cat-cow", name: "Cat-Cow Stretch", kind: "catCow", duration: 45, cue: "Start on hands and knees. Slowly round and arch your back with your breath.", equipment: "—", category: "postpartum", image: ppCatCowImg },
 ];
 
 export const getCatalogExercise = (id: string) => exerciseCatalog.find((e) => e.id === id);
