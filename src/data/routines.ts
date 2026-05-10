@@ -35,6 +35,14 @@ import ppGluteBridgeImg from "@/assets/exercises/pp-glute-bridge.png";
 import ppHeelSlidesImg from "@/assets/exercises/pp-heel-slides.png";
 import ppPelvicTiltsImg from "@/assets/exercises/pp-pelvic-tilts.png";
 import ppSideLegLiftImg from "@/assets/exercises/pp-side-leg-lift.png";
+import emomSquatImg from "@/assets/exercises/emom-squat.png";
+import emomPushupImg from "@/assets/exercises/emom-pushup.png";
+import emomSitupImg from "@/assets/exercises/emom-situp.png";
+import emomFbSquatImg from "@/assets/exercises/emom-fb-squat.png";
+import emomFbPushupImg from "@/assets/exercises/emom-fb-pushup.png";
+import emomFbLungeImg from "@/assets/exercises/emom-fb-lunge.png";
+import emomFbAbImg from "@/assets/exercises/emom-fb-ab.png";
+import emomFbBurpeeImg from "@/assets/exercises/emom-fb-burpee.png";
 
 export type ExerciseKind =
   | "squat"
@@ -167,11 +175,11 @@ export const routines: Routine[] = [
     accent: "lime",
     blocks: (() => {
       const round: Block[] = [
-        { type: "exercise", exercise: { id: "emom-fb-squat", name: "Squats (20 reps)", kind: "squat", duration: 60, cue: "Lower your hips down and back, then stand tall again. Keep your chest upright and complete 20 reps before resting.", equipment: "—" } },
-        { type: "exercise", exercise: { id: "emom-fb-pushup", name: "Push-ups (12–15 reps)", kind: "pushup", duration: 60, cue: "Lower with control and push back up in a straight line. Complete 12–15 reps, then rest the remainder of the minute.", equipment: "—" } },
-        { type: "exercise", exercise: { id: "emom-fb-lunge", name: "Reverse Lunges (20 reps total)", kind: "lunge", duration: 60, cue: "Step back and drop your rear knee toward the floor. Alternate legs for 20 reps total, then rest.", equipment: "—" } },
-        { type: "exercise", exercise: { id: "emom-fb-ab", name: "Bent Knee Ab (15–20 reps)", kind: "crunch", duration: 60, cue: "Lift your shoulders off the floor and exhale at the top. Complete 15–20 reps with control, then rest.", equipment: "Mat" } },
-        { type: "exercise", exercise: { id: "emom-fb-burpee", name: "Burpees (8–12 reps)", kind: "generic", duration: 60, cue: "Drop to a plank, hop your feet in, and stand or jump up. Complete 8–12 reps, then rest the remainder of the minute.", equipment: "—" } },
+        { type: "exercise", exercise: { id: "emom-fb-squat", name: "Squats (20 reps)", kind: "squat", duration: 60, cue: "Lower your hips down and back, then stand tall again. Keep your chest upright and complete 20 reps before resting.", equipment: "—", image: emomFbSquatImg } },
+        { type: "exercise", exercise: { id: "emom-fb-pushup", name: "Push-ups (12–15 reps)", kind: "pushup", duration: 60, cue: "Lower with control and push back up in a straight line. Complete 12–15 reps, then rest the remainder of the minute.", equipment: "—", image: emomFbPushupImg } },
+        { type: "exercise", exercise: { id: "emom-fb-lunge", name: "Reverse Lunges (20 reps total)", kind: "lunge", duration: 60, cue: "Step back and drop your rear knee toward the floor. Alternate legs for 20 reps total, then rest.", equipment: "—", image: emomFbLungeImg } },
+        { type: "exercise", exercise: { id: "emom-fb-ab", name: "Bent Knee Ab (15–20 reps)", kind: "crunch", duration: 60, cue: "Lift your shoulders off the floor and exhale at the top. Complete 15–20 reps with control, then rest.", equipment: "Mat", image: emomFbAbImg } },
+        { type: "exercise", exercise: { id: "emom-fb-burpee", name: "Burpees (8–12 reps)", kind: "generic", duration: 60, cue: "Drop to a plank, hop your feet in, and stand or jump up. Complete 8–12 reps, then rest the remainder of the minute.", equipment: "—", image: emomFbBurpeeImg } },
       ];
       const out: Block[] = [];
       for (let i = 0; i < 3; i++) out.push(...round);
@@ -186,9 +194,9 @@ export const routines: Routine[] = [
     accent: "amber",
     blocks: (() => {
       const round: Block[] = [
-        { type: "exercise", exercise: { id: "emom-pushup", name: "Push-ups (12 reps)", kind: "pushup", duration: 60, cue: "Lower with control and push back up. Keep your body in a straight line and complete 12 reps before resting.", equipment: "—" } },
-        { type: "exercise", exercise: { id: "emom-squat", name: "Air Squats (20 reps)", kind: "squat", duration: 60, cue: "Lower your hips down and back, then stand tall. Keep your chest up and knees over your toes for 20 reps.", equipment: "—" } },
-        { type: "exercise", exercise: { id: "emom-situp", name: "Sit-ups (15 reps)", kind: "generic", duration: 60, cue: "Sit all the way up, then lower back down with control. Exhale on the way up and complete 15 reps.", equipment: "Mat" } },
+        { type: "exercise", exercise: { id: "emom-pushup", name: "Push-ups (12 reps)", kind: "pushup", duration: 60, cue: "Lower with control and push back up. Keep your body in a straight line and complete 12 reps before resting.", equipment: "—", image: emomPushupImg } },
+        { type: "exercise", exercise: { id: "emom-squat", name: "Air Squats (20 reps)", kind: "squat", duration: 60, cue: "Lower your hips down and back, then stand tall. Keep your chest up and knees over your toes for 20 reps.", equipment: "—", image: emomSquatImg } },
+        { type: "exercise", exercise: { id: "emom-situp", name: "Sit-ups (15 reps)", kind: "generic", duration: 60, cue: "Sit all the way up, then lower back down with control. Exhale on the way up and complete 15 reps.", equipment: "Mat", image: emomSitupImg } },
       ];
       const out: Block[] = [];
       for (let i = 0; i < 5; i++) out.push(...round);
