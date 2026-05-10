@@ -208,7 +208,7 @@ export const routines: Routine[] = [
   {
     id: "pp-starter",
     name: "Postpartum Starter",
-    tagline: "A gentle postpartum routine focused on breathing, core activation, and stability.",
+    tagline: "Postpartum · Mat · 12 min · Gentle core & stability",
     totalMinutes: 12,
     accent: "rose",
     blocks: buildRounds([
