@@ -87,7 +87,7 @@ export type Routine = {
   name: string;
   tagline: string;
   totalMinutes: number;
-  accent: "lime" | "cyan" | "amber";
+  accent: "lime" | "cyan" | "amber" | "rose";
   blocks: Block[];
 };
 
