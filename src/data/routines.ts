@@ -190,7 +190,7 @@ export const routines: Routine[] = [
   {
     id: "db-strength-smash",
     name: "Dumbbell Strength Smash",
-    tagline: "A balanced dumbbell workout focused on strength and stability.",
+    tagline: "Dumbbell · 18 min · Strength & stability",
     totalMinutes: 18,
     accent: "cyan",
     blocks: buildRounds([
