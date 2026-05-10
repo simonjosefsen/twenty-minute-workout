@@ -8,12 +8,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const FEATURED_IDS = ["full-body", "emom-15-full-body", "mobility"];
+const FEATURED_IDS = ["full-body", "emom-15-full-body", "kb-full-body-burn"];
 
 const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }> = {
   lime: { ring: "from-primary/40 to-transparent", chip: "bg-primary/15 text-primary", icon: <Flame className="h-5 w-5" /> },
   cyan: { ring: "from-accent/40 to-transparent", chip: "bg-accent/15 text-accent", icon: <Activity className="h-5 w-5" /> },
   amber: { ring: "from-yellow-500/40 to-transparent", chip: "bg-yellow-500/15 text-yellow-400", icon: <Dumbbell className="h-5 w-5" /> },
+  rose: { ring: "from-pink-400/40 via-purple-400/20 to-transparent", chip: "bg-pink-400/15 text-pink-300", icon: <Sparkles className="h-5 w-5" /> },
 };
 
 const Index = () => {
