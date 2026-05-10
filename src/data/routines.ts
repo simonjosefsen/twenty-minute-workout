@@ -221,6 +221,8 @@ export const routines: Routine[] = [
       { type: "exercise", exercise: { id: "pp-dead-bug", name: "Dead Bug", kind: "generic", reps: 10, cue: "Lie on your back with arms and legs raised. Slowly lower opposite arm and leg while keeping your lower back supported.", equipment: "—", image: ppDeadBugImg } },
     ]),
   },
+  {
+    id: "emom-15-full-body",
     name: "EMOM 15 – Daily CrossFit (no equipment)",
     tagline: "Bodyweight · 15 min · 3 rounds",
     totalMinutes: 15,
