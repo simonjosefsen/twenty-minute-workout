@@ -35,6 +35,14 @@ import ppGluteBridgeImg from "@/assets/exercises/pp-glute-bridge.png";
 import ppHeelSlidesImg from "@/assets/exercises/pp-heel-slides.png";
 import ppPelvicTiltsImg from "@/assets/exercises/pp-pelvic-tilts.png";
 import ppSideLegLiftImg from "@/assets/exercises/pp-side-leg-lift.png";
+import emomSquatImg from "@/assets/exercises/emom-squat.png";
+import emomPushupImg from "@/assets/exercises/emom-pushup.png";
+import emomSitupImg from "@/assets/exercises/emom-situp.png";
+import emomFbSquatImg from "@/assets/exercises/emom-fb-squat.png";
+import emomFbPushupImg from "@/assets/exercises/emom-fb-pushup.png";
+import emomFbLungeImg from "@/assets/exercises/emom-fb-lunge.png";
+import emomFbAbImg from "@/assets/exercises/emom-fb-ab.png";
+import emomFbBurpeeImg from "@/assets/exercises/emom-fb-burpee.png";
 
 export type ExerciseKind =
   | "squat"
