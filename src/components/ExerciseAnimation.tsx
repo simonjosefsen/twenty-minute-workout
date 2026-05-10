@@ -9,14 +9,13 @@ type Props = { kind: ExerciseKind; size?: number; image?: string };
 export const ExerciseAnimation = ({ kind, size = 220, image }: Props) => {
   if (image) {
     return (
-      <img
-        src={image}
-        alt=""
-        width={size}
-        height={size}
-        className="rounded-2xl object-cover drop-shadow-[0_10px_30px_rgba(198,255,61,0.15)]"
-        style={{ width: size, height: size }}
-      />
+      <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden flex items-center justify-center">
+        <img
+          src={image}
+          alt=""
+          className="w-full h-full object-contain drop-shadow-[0_10px_30px_rgba(198,255,61,0.15)]"
+        />
+      </div>
     );
   }
   const stroke = "hsl(var(--primary))";

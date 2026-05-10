@@ -142,7 +142,7 @@ const Preview = () => {
                   const showReorder = ri === 0;
                   return (
                     <li key={i} className="glass-card p-3 flex items-center gap-3">
-                      <div className="h-14 w-20 shrink-0 rounded-xl bg-secondary/50 overflow-hidden flex items-center justify-center">
+                      <div className="w-20 aspect-[4/3] shrink-0 rounded-xl bg-secondary/50 overflow-hidden flex items-center justify-center">
                         <ExerciseAnimation kind={ex.kind} size={110} image={ex.image} />
                       </div>
                       <div className="flex-1 min-w-0">
