@@ -170,7 +170,7 @@ export const routines: Routine[] = [
   {
     id: "kb-full-body-burn",
     name: "Kettlebell Full Body Burn",
-    tagline: "Full body kettlebell conditioning with strength, core, and endurance.",
+    tagline: "Kettlebell · 20 min · Full body conditioning",
     totalMinutes: 20,
     accent: "lime",
     blocks: buildRounds([
