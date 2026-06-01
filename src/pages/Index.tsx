@@ -17,6 +17,14 @@ const accents: Record<string, { ring: string; chip: string; icon: JSX.Element }>
   rose: { ring: "from-pink-400/40 via-purple-400/20 to-transparent", chip: "bg-pink-400/15 text-pink-300", icon: <Sparkles className="h-5 w-5" /> },
 };
 
+// Per-workout subtle gradient accents for Featured cards (premium, dark-friendly)
+const featuredCardBg: Record<string, string> = {
+  "full-body": "from-lime-500/20 via-green-500/10 to-transparent",
+  "emom-15-full-body": "from-orange-500/20 via-amber-500/10 to-transparent",
+  "kb-full-body-burn": "from-emerald-500/20 via-teal-500/10 to-transparent",
+  "pp-starter": "from-pink-400/20 via-purple-400/10 to-transparent",
+};
+
 const Index = () => {
   const { history, refresh } = useHistory();
   const today = new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
@@ -150,7 +158,7 @@ const Index = () => {
                   to={`/routine/${r.id}`}
                   className="block group active:scale-[0.99] transition"
                 >
-                  <div className={cn("glass-card relative overflow-hidden p-5 bg-gradient-to-br", a.ring)}>
+                  <div className={cn("glass-card relative overflow-hidden p-5 bg-gradient-to-br", featuredCardBg[r.id] ?? a.ring)}>
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <span className={cn("inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full", a.chip)}>
