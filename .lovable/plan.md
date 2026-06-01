@@ -1,25 +1,21 @@
-## Test: brug uploadet billede som ikon for KB Swing
+## Goal
+Give each Featured workout card its own subtle, premium gradient background instead of reusing the same accent-based gradient for all workouts of the same accent color.
 
-Minimal ændring – kun til test på én øvelse.
+## Current behavior
+- Featured cards use an `accents` map keyed by `accent` (`lime` | `cyan` | `amber` | `rose`).
+- All workouts with the same accent share the same ring/chip/icon styling.
 
-### Ændringer
+## Changes
+### `src/pages/Index.tsx`
+1. Add a `featuredCardBg` map keyed by workout `id`:
+   - `"full-body"` → `from-lime-500/20 via-green-500/10 to-transparent` (lime/green)
+   - `"emom-15-full-body"` → `from-orange-500/20 via-amber-500/10 to-transparent` (warm orange/amber)
+   - `"kb-full-body-burn"` → `from-emerald-500/20 via-teal-500/10 to-transparent` (deeper green/teal)
+   - `"pp-starter"` (for future use) → `from-pink-400/20 via-purple-400/10 to-transparent` (soft pink/purple)
+2. In `renderRoutineCard`, replace the shared `bg-gradient-to-br {a.ring}` with the per-workout gradient from `featuredCardBg[r.id]`.
+3. Keep the badge chip, icon, and text colors unchanged (still driven by `a.chip` / `a.icon`).
 
-1. **Kopier billedet** fra `user-uploads://kettlebell-swing.png` til `src/assets/exercises/kb-swing.png`.
-
-2. **`src/data/routines.ts`**
-   - Tilføj `image?: string` til `Exercise`-typen.
-   - På `kb-swing` (begge steder: i Full Body-routinen ~line 52 og i `exerciseCatalog` ~line 166), tilføj `image: "/src/assets/exercises/kb-swing.png"` via en import-reference (importér billedet øverst og brug variablen).
-
-3. **`src/components/ExerciseAnimation.tsx`**
-   - Udvid props: `image?: string`.
-   - Hvis `image` er sat, render `<img src={image} />` (kvadratisk, samme `size`, `rounded-2xl`, `object-cover`) i stedet for SVG. Ellers uændret animation (fallback bevares som ønsket).
-
-4. **`src/pages/Workout.tsx` + `src/pages/Preview.tsx`**
-   - Send `image={block.exercise.image}` / `image={ex.image}` med til `<ExerciseAnimation />`.
-
-### Hvad ændres ikke
-- Ingen øvrige øvelser røres.
-- Ingen animationer fjernes.
-- Ingen logik, timer, EMOM, IDs, equipment eller kategorier ændres.
-
-Resultat: KB Swing viser dit uploadede billede; alle andre øvelser ser ud som før. Når du har set det og er tilfreds, uploader du de resterende ~34 billeder, og jeg kører samme mønster for dem.
+## Out of scope
+- No changes to workout data, logic, timers, EMOM, onboarding, tabs, or custom workouts.
+- No new components.
+- No global redesign.
