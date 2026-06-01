@@ -225,6 +225,8 @@ const Workout = () => {
             ) : (
               <RepCounter target={block.exercise.reps ?? 10} value={reps} setValue={setReps} />
             )}
+
+            {nextExercise && <NextExercisePreview ex={nextExercise} />}
           </>
         )}
 
