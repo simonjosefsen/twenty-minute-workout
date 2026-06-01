@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles, Pencil } from "lucide-react";
-import { routines, loadCustomWorkout, loadSavedCustomWorkouts, deleteSavedCustomWorkout } from "@/data/routines";
+import { ChevronRight, Dumbbell, Flame, Activity, Clock, Trash2, Sparkles, Pencil, RotateCcw, Play } from "lucide-react";
+import { routines, loadCustomWorkout, loadSavedCustomWorkouts, deleteSavedCustomWorkout, getRoutine } from "@/data/routines";
 import { useHistory, computeWeeklyStreak, deleteHistoryEntry, loadWeeklyGoal, saveWeeklyGoal } from "@/lib/history";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
