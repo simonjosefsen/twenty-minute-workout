@@ -158,7 +158,7 @@ const Index = () => {
                   to={`/routine/${r.id}`}
                   className="block group active:scale-[0.99] transition"
                 >
-                  <div className={cn("glass-card relative overflow-hidden p-5 bg-gradient-to-br", a.ring)}>
+                  <div className={cn("glass-card relative overflow-hidden p-5 bg-gradient-to-br", featuredCardBg[r.id] ?? a.ring)}>
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <span className={cn("inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full", a.chip)}>
