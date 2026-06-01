@@ -303,6 +303,29 @@ const Workout = () => {
   );
 };
 
+const NextExercisePreview = ({ ex }: { ex: Exercise }) => {
+  const detail =
+    typeof ex.duration === "number" ? `${ex.duration} sec` : ex.reps ? `${ex.reps} reps` : null;
+  return (
+    <div className="w-full max-w-md mt-5">
+      <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1.5">Next</p>
+      <div className="glass-card px-3 py-2.5 flex items-center gap-3">
+        {ex.image && (
+          <div className="h-12 w-16 rounded-lg overflow-hidden bg-secondary/40 shrink-0 flex items-center justify-center">
+            <img src={ex.image} alt="" className="w-full h-full object-contain" />
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium truncate">{ex.name}</p>
+          {detail && <p className="text-xs text-muted-foreground">{detail}</p>}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
 const TimerCircle = ({ remaining, total }: { remaining: number; total: number }) => {
   const r = 78;
   const C = 2 * Math.PI * r;
