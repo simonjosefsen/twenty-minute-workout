@@ -140,6 +140,28 @@ const Index = () => {
         </Dialog>
       </section>
 
+      {/* Repeat last workout */}
+      {(() => {
+        const last = history[0];
+        if (!last || !getRoutine(last.routineId)) return null;
+        return (
+          <section className="px-6 mb-6">
+            <Link to={`/workout/${last.routineId}`} className="block group active:scale-[0.99] transition">
+              <div className="glass-card relative overflow-hidden p-4 bg-gradient-to-br from-primary/20 to-transparent flex items-center gap-3">
+                <div className="h-11 w-11 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0">
+                  <RotateCcw className="h-5 w-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Repeat last workout</p>
+                  <p className="text-base font-semibold truncate">{last.routineName}</p>
+                </div>
+                <Play className="h-5 w-5 text-primary shrink-0" />
+              </div>
+            </Link>
+          </section>
+        );
+      })()}
+
       {/* Routines */}
       <section className="px-6">
         <Tabs defaultValue="featured" className="w-full">
