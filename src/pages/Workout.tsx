@@ -4,7 +4,7 @@ import { ArrowLeft, Check, Pause, Play, SkipForward, Plus, Minus, RotateCcw } fr
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import ExerciseAnimation from "@/components/ExerciseAnimation";
-import { getRoutine } from "@/data/routines";
+import { getRoutine, type Exercise } from "@/data/routines";
 import { saveHistoryEntry } from "@/lib/history";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -84,6 +84,15 @@ const Workout = () => {
   const targetSeconds = block.type === "rest" ? block.duration : block.exercise.duration;
   const isTimed = typeof targetSeconds === "number";
   const remaining = isTimed ? Math.max(0, (targetSeconds as number) - elapsed) : null;
+
+  // Next upcoming exercise (skips rest blocks); null if current is the last exercise.
+  const nextExercise: Exercise | null = (() => {
+    for (let i = index + 1; i < routine.blocks.length; i++) {
+      const b = routine.blocks[i];
+      if (b.type === "exercise") return b.exercise;
+    }
+    return null;
+  })();
 
   // Reset block-local state when block changes
   useEffect(() => {
@@ -216,6 +225,8 @@ const Workout = () => {
             ) : (
               <RepCounter target={block.exercise.reps ?? 10} value={reps} setValue={setReps} />
             )}
+
+            {nextExercise && <NextExercisePreview ex={nextExercise} />}
           </>
         )}
 
@@ -291,6 +302,29 @@ const Workout = () => {
     </div>
   );
 };
+
+const NextExercisePreview = ({ ex }: { ex: Exercise }) => {
+  const detail =
+    typeof ex.duration === "number" ? `${ex.duration} sec` : ex.reps ? `${ex.reps} reps` : null;
+  return (
+    <div className="w-full max-w-md mt-5">
+      <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1.5">Next</p>
+      <div className="glass-card px-3 py-2.5 flex items-center gap-3">
+        {ex.image && (
+          <div className="h-12 w-16 rounded-lg overflow-hidden bg-secondary/40 shrink-0 flex items-center justify-center">
+            <img src={ex.image} alt="" className="w-full h-full object-contain" />
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium truncate">{ex.name}</p>
+          {detail && <p className="text-xs text-muted-foreground">{detail}</p>}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 
 const TimerCircle = ({ remaining, total }: { remaining: number; total: number }) => {
   const r = 78;
