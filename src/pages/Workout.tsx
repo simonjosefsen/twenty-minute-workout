@@ -4,7 +4,7 @@ import { ArrowLeft, Check, Pause, Play, SkipForward, Plus, Minus, RotateCcw } fr
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import ExerciseAnimation from "@/components/ExerciseAnimation";
-import { getRoutine } from "@/data/routines";
+import { getRoutine, type Exercise } from "@/data/routines";
 import { saveHistoryEntry } from "@/lib/history";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
