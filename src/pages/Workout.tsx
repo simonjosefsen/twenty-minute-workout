@@ -85,6 +85,15 @@ const Workout = () => {
   const isTimed = typeof targetSeconds === "number";
   const remaining = isTimed ? Math.max(0, (targetSeconds as number) - elapsed) : null;
 
+  // Next upcoming exercise (skips rest blocks); null if current is the last exercise.
+  const nextExercise: Exercise | null = (() => {
+    for (let i = index + 1; i < routine.blocks.length; i++) {
+      const b = routine.blocks[i];
+      if (b.type === "exercise") return b.exercise;
+    }
+    return null;
+  })();
+
   // Reset block-local state when block changes
   useEffect(() => {
     setElapsed(0);
