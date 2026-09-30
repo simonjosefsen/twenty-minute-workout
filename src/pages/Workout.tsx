@@ -130,41 +130,39 @@ const Workout = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remaining, isTimed, running]);
 
-  const finish = () => {
+  const finish = (finalCompleted: Set<number> = completed) => {
     const totalSec = Math.round((Date.now() - startedAtRef.current) / 1000);
+    const doneCount = finalCompleted.size;
     saveHistoryEntry({
       routineId: routine.id,
       routineName: routine.name,
       date: new Date().toISOString(),
       durationSec: totalSec,
-      completed: completed.size,
+      completed: doneCount,
       total: exerciseBlocks.length,
     });
-    toast.success("Workout complete 💪", { description: `${completed.size}/${exerciseBlocks.length} exercises checked.` });
-    navigate("/done", { state: { completed: completed.size, total: exerciseBlocks.length, durationSec: totalSec, routineName: routine.name } });
+    toast.success("Workout complete 💪", { description: `${doneCount}/${exerciseBlocks.length} exercises checked.` });
+    navigate("/done", { state: { completed: doneCount, total: exerciseBlocks.length, durationSec: totalSec, routineName: routine.name } });
   };
 
   const handleNext = (autoCheck = false) => {
-    if (isExercise && (autoCheck || true)) {
-      // Mark current exercise as completed when we move on (timer auto-advance or user skip)
-      if (autoCheck) {
-        setCompleted((prev) => new Set(prev).add(index));
-      }
+    let nextSet = completed;
+    if (isExercise && autoCheck) {
+      nextSet = new Set(completed).add(index);
+      setCompleted(nextSet);
     }
-    if (index >= totalBlocks - 1) return finish();
+    if (index >= totalBlocks - 1) return finish(nextSet);
     setIndex((i) => i + 1);
   };
 
   const handleCheck = () => {
-    setCompleted((prev) => {
-      const next = new Set(prev);
-      if (next.has(index)) next.delete(index);
-      else next.add(index);
-      return next;
-    });
+    const nextSet = new Set(completed);
+    if (nextSet.has(index)) nextSet.delete(index);
+    else nextSet.add(index);
+    setCompleted(nextSet);
     // advance after a short beat
     setTimeout(() => {
-      if (index >= totalBlocks - 1) finish();
+      if (index >= totalBlocks - 1) finish(nextSet);
       else setIndex((i) => i + 1);
     }, 220);
   };
