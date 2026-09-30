@@ -43,6 +43,8 @@ import emomFbPushupImg from "@/assets/exercises/emom-fb-pushup.png";
 import emomFbLungeImg from "@/assets/exercises/emom-fb-lunge.png";
 import emomFbAbImg from "@/assets/exercises/emom-fb-ab.png";
 import emomFbBurpeeImg from "@/assets/exercises/emom-fb-burpee.png";
+import aroundTheWorldsImg from "@/assets/exercises/around-the-worlds.png";
+import cleanPressImg from "@/assets/exercises/clean-press.png";
 
 export type ExerciseKind =
   | "squat"
@@ -256,6 +258,24 @@ export const routines: Routine[] = [
       for (let i = 0; i < 5; i++) out.push(...round);
       return out;
     })(),
+  },
+  {
+    id: "kb-circuit",
+    name: "Kettlebell Circuit",
+    tagline: "Kettlebell · 15 min · Full body circuit",
+    totalMinutes: 15,
+    accent: "cyan",
+    blocks: buildRounds([
+      { type: "exercise", exercise: { id: "around-the-worlds", name: "Around the Worlds", kind: "twist", reps: 20, cue: "Pass the kettlebell around your waist, 10 times each direction. Stay tall with a braced core and control the circle.", equipment: "Kettlebell", image: aroundTheWorldsImg } },
+      restShort(20),
+      { type: "exercise", exercise: { id: "kb-swing-circuit", name: "Kettlebell Swings", kind: "swing", reps: 15, cue: "Hinge at the hips and drive the kettlebell to chest height. Snap your glutes at the top and keep your back flat for 15 reps.", equipment: "Kettlebell", image: kbSwingImg } },
+      restShort(20),
+      { type: "exercise", exercise: { id: "clean-press", name: "Clean + Presses", kind: "generic", reps: 10, cue: "Pull the kettlebell up to your shoulder, then press it overhead to a locked-out arm. Lower with control for 10 reps.", equipment: "Kettlebell", image: cleanPressImg } },
+      restShort(20),
+      { type: "exercise", exercise: { id: "goblet-squat-circuit", name: "Goblet Squats", kind: "squat", reps: 10, cue: "Hold the kettlebell at your chest and squat down between your heels. Keep your chest tall and knees tracking over your toes for 10 reps.", equipment: "Kettlebell", image: gobletSquatImg } },
+      restShort(20),
+      { type: "exercise", exercise: { id: "chest-crossovers", name: "Chest-Level Crossovers", kind: "generic", reps: 10, cue: "Swing the kettlebell from hand to hand at chest level, 10 crosses. Keep the movement smooth and your core engaged.", equipment: "Kettlebell" } },
+    ]),
   },
 ];
 
