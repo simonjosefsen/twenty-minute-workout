@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Check, Pause, Play, SkipForward, Plus, Minus, RotateCcw } from "lucide-react";
+import { ArrowLeft, Check, Pause, Play, SkipForward } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import ExerciseAnimation from "@/components/ExerciseAnimation";
@@ -23,7 +23,6 @@ const Workout = () => {
   const [index, setIndex] = useState(0);
   const [elapsed, setElapsed] = useState(0); // seconds since block start
   const [running, setRunning] = useState(true);
-  const [reps, setReps] = useState(0);
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const startedAtRef = useRef<number>(Date.now());
 
@@ -97,7 +96,6 @@ const Workout = () => {
   // Reset block-local state when block changes
   useEffect(() => {
     setElapsed(0);
-    setReps(0);
     const cur = routine.blocks[index];
     const isTimedExercise = cur.type === "exercise" && typeof cur.exercise.duration === "number";
     // EMOM 15 auto-starts each timed exercise; other timed exercises wait for Start.
@@ -217,11 +215,11 @@ const Workout = () => {
               )}
             </div>
 
-            {/* Timer or Rep counter */}
+            {/* Timer or rep target */}
             {isTimed ? (
               <TimerCircle remaining={remaining ?? 0} total={targetSeconds as number} />
             ) : (
-              <RepCounter target={block.exercise.reps ?? 10} value={reps} setValue={setReps} />
+              <RepTarget target={block.exercise.reps ?? 10} />
             )}
 
             {nextExercise && <NextExercisePreview ex={nextExercise} />}
