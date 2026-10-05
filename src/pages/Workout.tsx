@@ -352,28 +352,35 @@ const TimerCircle = ({ remaining, total }: { remaining: number; total: number })
   );
 };
 
-const RepCounter = ({ target, value, setValue }: { target: number; value: number; setValue: (v: number) => void }) => {
+const RepTarget = ({ target }: { target: number }) => {
+  const r = 78;
+  const C = 2 * Math.PI * r;
+  const seg = C / Math.max(1, target);
   return (
-    <div className="mt-4 flex flex-col items-center gap-3">
-      <p className="text-xs uppercase tracking-widest text-muted-foreground">Target {target} reps</p>
-      <div className="flex items-center gap-5">
-        <Button variant="secondary" size="icon" className="h-14 w-14 rounded-full" onClick={() => setValue(Math.max(0, value - 1))}>
-          <Minus className="h-5 w-5" />
-        </Button>
-        <button
-          onClick={() => setValue(value + 1)}
-          className="h-32 w-32 rounded-full bg-primary text-primary-foreground text-5xl font-bold tabular-nums shadow-[var(--shadow-glow)] active:scale-95 transition"
-          aria-label="Tap to add rep"
-        >
-          {value}
-        </button>
-        <Button variant="secondary" size="icon" className="h-14 w-14 rounded-full" onClick={() => setValue(value + 1)}>
-          <Plus className="h-5 w-5" />
-        </Button>
+    <div className="mt-4 flex flex-col items-center">
+      <div className="relative w-[200px] h-[200px] flex items-center justify-center">
+        <svg width="200" height="200" className="-rotate-90">
+          <circle cx="100" cy="100" r={r} stroke="hsl(var(--muted))" strokeWidth="10" fill="none" />
+          <circle
+            cx="100"
+            cy="100"
+            r={r}
+            stroke="hsl(var(--primary))"
+            strokeWidth="10"
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={`${seg * 0.55} ${seg * 0.45}`}
+            opacity={0.85}
+          />
+        </svg>
+        <div className="absolute text-center">
+          <div className="text-5xl font-bold tabular-nums">{target}</div>
+          <div className="text-xs text-muted-foreground uppercase tracking-widest mt-1">reps</div>
+        </div>
       </div>
-      <button onClick={() => setValue(0)} className="text-xs text-muted-foreground inline-flex items-center gap-1 mt-1">
-        <RotateCcw className="h-3 w-3" /> Reset
-      </button>
+      <p className="mt-4 text-xs text-muted-foreground max-w-[210px] text-center">
+        Press Done when the set is complete
+      </p>
     </div>
   );
 };
